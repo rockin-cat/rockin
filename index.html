@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ROCKIN · Entrenador d'acompanyament</title>
+  <link rel="icon" type="image/png" href="assets/brand/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/play.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.1.22/Tone.js"></script>
+  <script>
+    // Shows any error on the page, so problems in a browser can be reported.
+    window.addEventListener('error', (event) => showPageError(event.message, event.filename, event.lineno));
+    window.addEventListener('unhandledrejection', (event) => showPageError(String(event.reason?.message ?? event.reason)));
+    function showPageError(message, file = '', line = '') {
+      const box = document.getElementById('page-error') ?? document.body?.appendChild(Object.assign(document.createElement('div'), { id: 'page-error' }));
+      if (!box) return;
+      const where = file ? ` (${file.split('/').pop()}:${line})` : '';
+      box.hidden = false;
+      box.textContent = `Hi ha hagut un error${where}: ${message}. Prova de recarregar amb Cmd+Shift+R; si continua, envia aquest missatge.`;
+    }
+    if (typeof Tone === 'undefined') {
+      window.addEventListener('DOMContentLoaded', () => showPageError("No s'ha pogut carregar la llibreria de so (Tone.js). Cal connexió a internet."));
+    }
+  </script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1 class="brand-title">
+        <img class="brand-logo light" src="assets/brand/rockin-wordmark.png" alt="ROCKIN">
+        <img class="brand-logo dark" src="assets/brand/rockin-wordmark-dark.png" alt="ROCKIN">
+        <span>entrenador d'acompanyament</span>
+      </h1>
+      <nav class="views" aria-label="Seccions">
+        <button type="button" class="view-tab" data-view="home" aria-pressed="false">⌂ Inici</button>
+        <button type="button" class="view-tab studio-only" data-view="game" aria-pressed="false">Sessió</button>
+        <button type="button" class="view-tab studio-only" data-view="learn" aria-pressed="false">Notes i acords</button>
+      </nav>
+    </div>
+    <div class="topbar-status">
+      <span id="sound-hint" class="notice" hidden>Fes clic a la pàgina per sentir el que toques</span>
+      <label class="toggle" title="Toca amb les lletres de l'ordinador (A = Do); les lletres surten a les tecles">
+        <input id="computer-keys" type="checkbox"> Tocar amb l'ordinador
+      </label>
+      <label class="toggle" title="Desactiva-ho si el teu teclat ja té altaveus">
+        <input id="keyboard-sound" type="checkbox" checked> Sentir les meves notes
+      </label>
+      <div id="midi-status" class="status">MIDI: connectant…</div>
+    </div>
+  </header>
+
+  <div id="home-view" class="home-view">
+    <div class="home-intro">
+      <img class="home-logo" src="assets/brand/rockin-logo.png" alt="ROCKIN · [r]evolucionem la música">
+      <h2>Aprèn a acompanyar cançons amb el teclat</h2>
+      <p>Toca acords seguint les cartes de ritme de ROCKIN, amb una base musical que t'acompanya.</p>
+    </div>
+    <div class="home-doors">
+      <button type="button" class="home-door play" data-go="play" data-section="juga">
+        <img class="door-logo" src="assets/brand/rockin-icon.png" alt="" aria-hidden="true">
+        <strong>▶ Juga</strong>
+        <span>El camí ROCKIN i el taller d'acords, pas a pas.</span>
+      </button>
+      <div class="home-side">
+        <button type="button" class="home-door songs" data-go="play" data-section="cancons">
+          <span class="door-icon" aria-hidden="true">♬</span>
+          <strong>Cançons</strong>
+          <span>Camins per aprendre una cançó coneguda o una progressió pròpia.</span>
+        </button>
+        <button type="button" class="home-door band" data-go="play" data-section="banda">
+          <span class="door-icon" aria-hidden="true">🎤</span>
+          <strong>Toca amb la banda</strong>
+          <span>Posa-ho tot a prova: la banda no para i la dificultat s'adapta a com toques.</span>
+        </button>
+        <button type="button" class="home-door improv" data-go="play" data-section="improvisa">
+          <span class="door-icon" aria-hidden="true">✨</span>
+          <strong>Improvisa</strong>
+          <span>La banda toca una roda i tu hi inventes: roda oberta, pregunta i resposta o reptes curts.</span>
+        </button>
+        <button type="button" class="home-door session" data-go="game">
+          <span class="door-icon" aria-hidden="true">⚙</span>
+          <strong>Sessió</strong>
+          <span>Per al professorat: progressions lliures, estils i reptes per treballar a classe.</span>
+        </button>
+      </div>
+    </div>
+    <p class="home-guide"><button type="button" id="guide-link" class="chip small">📘 Guia del professorat</button></p>
+    <p class="home-version">Versió del 18 de setembre (27) · improvisa · toca amb la banda</p>
+    <p class="hint home-hint">Pots tocar amb un teclat MIDI (Chrome o Edge) o amb el ratolí sobre el piano de la pantalla. Sense teclat? Activa <b>«Tocar amb l'ordinador»</b> a dalt i les lletres apareixeran a les tecles (<kbd>A</kbd> és el Do).</p>
+  </div>
+
+  <div id="play-view" class="play-view" hidden></div>
+
+  <div id="game-view" hidden>
+  <form id="setup" class="setup">
+    <fieldset id="settings" class="settings">
+      <section class="panel progression-panel">
+        <h2>Progressió d'acords</h2>
+        <div id="progression-editor"></div>
+        <details class="as-text">
+          <summary>Edita com a text</summary>
+          <label><span>Un acord per compàs, separats per <kbd>|</kbd> (<kbd>%</kbd> repeteix el compàs anterior)</span>
+            <input id="progression" value="C | Am | F | G" spellcheck="false" autocomplete="off">
+          </label>
+        </details>
+      </section>
+
+      <section class="panel options-panel">
+        <h2>Compàs i tempo</h2>
+        <div class="segmented" role="radiogroup" aria-label="Compàs">
+          <label><input type="radio" name="meter" value="4/4" checked><span><b>4/4</b><small>binari</small></span></label>
+          <label><input type="radio" name="meter" value="3/4"><span><b>3/4</b><small>vals</small></span></label>
+          <label><input type="radio" name="meter" value="6/8"><span><b>6/8</b><small>2 polsos</small></span></label>
+          <label><input type="radio" name="meter" value="9/8"><span><b>9/8</b><small>3 polsos</small></span></label>
+          <label><input type="radio" name="meter" value="12/8"><span><b>12/8</b><small>4 polsos</small></span></label>
+        </div>
+        <label class="tempo"><span>Tempo: <output id="tempo-label">80</output> polsos per minut</span>
+          <span class="tempo-row">
+            <button type="button" class="chip" id="tempo-down" title="Més lent">−5</button>
+            <input id="tempo" type="range" min="30" max="240" step="1" value="80">
+            <button type="button" class="chip" id="tempo-up" title="Més ràpid">+5</button>
+          </span>
+        </label>
+
+        <h2>Base musical</h2>
+        <div class="row">
+          <label>Estil
+            <select id="style"></select>
+          </label>
+          <label>Volum
+            <input id="backing-volume" type="range" min="-30" max="0" step="1" value="-6">
+          </label>
+        </div>
+        <p id="style-hint" class="hint"></p>
+        <label class="sync"><span>Sincronia: <output id="latency-label">0</output> ms</span>
+          <input id="latency" type="range" min="-50" max="300" step="5" value="0">
+          <small class="hint">Si la música sona més tard que la pilota i el teclat (p. ex. amb auriculars Bluetooth), puja-ho fins que coincideixin.</small>
+        </label>
+        <label class="toggle"><input id="backing-chords" type="checkbox" checked> Piano amb els acords a la base</label>
+
+        <h2>Joc</h2>
+        <div class="segmented mode" role="radiogroup" aria-label="Mode de joc">
+          <label><input type="radio" name="mode" value="free" checked><span><b>Joc lliure</b><small>cartes a l'atzar</small></span></label>
+          <label><input type="radio" name="mode" value="challenge"><span><b>Repte</b><small>carta a carta</small></span></label>
+        </div>
+        <div class="row">
+          <label>Què toques
+            <select id="level">
+              <option value="1">1 · Ritme + fonamental</option>
+              <option value="2">2 · Ritme + tríada</option>
+              <option value="3">3 · Contorn melòdic</option>
+              <option value="4">4 · Baix + acord (dues mans)</option>
+              <option value="5">5 · Dues mans: el mateix acord (cartes de dues files)</option>
+              <option value="6">6 · Dues mans: l'esquerra fa el baix (cartes de dues files)</option>
+              <option value="7">7 · Dues mans: cada mà el seu ritme (només 4/4)</option>
+            </select>
+          </label>
+          <label class="free-only">Dificultat de les cartes
+            <select id="difficulty">
+              <option value="easy">Fàcil · temps sencers</option>
+              <option value="medium">Intermedi · 1a subdivisió</option>
+              <option value="hard">Difícil · més subdivisions</option>
+              <option value="all">Totes</option>
+            </select>
+          </label>
+          <label class="free-only">Carta nova
+            <select id="card-change">
+              <option value="pass">quan fas una volta sense errors</option>
+              <option value="loop">a cada volta</option>
+              <option value="bar">a cada compàs</option>
+            </select>
+          </label>
+          <label>Ajuda al teclat
+            <select id="help">
+              <option value="full">Notes que arriben</option>
+              <option value="cards">Cartes al piano roll (experimental)</option>
+              <option value="keys">Només les tecles (sense ritme)</option>
+              <option value="none">Només la carta</option>
+            </select>
+          </label>
+        </div>
+        <label class="toggle chord-only"><input id="inversions" type="checkbox"> Inversions: el teclat proposa la posició de l'acord més propera a l'anterior</label>
+        <p id="help-hint" class="hint"></p>
+      </section>
+    </fieldset>
+    <section id="challenge-panel" class="panel challenge-panel" hidden>
+      <h2>Camí de reptes</h2>
+      <p class="hint">Tria una carta desbloquejada. La superes quan fas dues rondes seguides de la progressió sense cap error. Si una carta no et surt, «⏭ Salta aquesta carta» obre la següent (la saltada queda marcada i la pots provar quan vulguis). Quan les has superat o saltat totes, toca el repte final amb cartes barrejades; amb 2 estrelles o més s'obre la dificultat següent.</p>
+      <div id="challenge-map" class="challenge-map"></div>
+      <div class="challenge-tools">
+        <label class="toggle"><input id="unlock-all" type="checkbox"> Mode professor: tot desbloquejat</label>
+        <button type="button" id="reset-progress" class="chip small">Esborra el progrés</button>
+      </div>
+    </section>
+    <div class="actions">
+      <button id="start" type="submit">▶ Comença</button>
+      <button id="stop" type="button" disabled>■ Atura</button>
+      <span class="shortcuts"><kbd>Espai</kbd> comença / pausa · <kbd>Esc</kbd> atura</span>
+    </div>
+  </form>
+  <p id="error" class="error" hidden></p>
+
+  <main id="stage" class="stage">
+    <div class="stage-bar">
+      <ol id="chords" class="chords"></ol>
+      <div class="stage-tools">
+        <span class="fullscreen-only shortcuts"><kbd>Espai</kbd> pausa · <kbd>Esc</kbd> surt</span>
+        <button type="button" id="fullscreen" class="chip" title="Carta i teclat a pantalla completa">⛶ Pantalla completa</button>
+      </div>
+    </div>
+    <div class="card-area">
+      <div class="card">
+        <img id="card-image" alt="" hidden>
+        <canvas id="playhead"></canvas>
+      </div>
+      <aside class="feedback">
+        <div id="round-banner" class="round-banner" hidden></div>
+        <div id="next-card" class="next-card" hidden>
+          <img id="next-image" alt="">
+          <div><strong>Següent carta</strong><small id="next-label"></small></div>
+        </div>
+        <div id="challenge-status" class="challenge-status" hidden></div>
+        <button type="button" id="skip-card" class="secondary demo-button skip-button" hidden title="Si aquesta carta no et surt, salta-la: s'obre la següent i la pots tornar a provar quan vulguis">⏭ Salta aquesta carta</button>
+        <button type="button" id="demo" class="secondary demo-button" title="El programa toca la carta durant una ronda sencera; aquesta ronda no puntua">♪ Escolta la carta</button>
+        <div id="count-in" class="count-in"></div>
+        <div id="verdict" class="verdict"></div>
+        <dl class="score">
+          <div><dt>Encerts</dt><dd id="hits">0</dd></div>
+          <div><dt>Errors</dt><dd id="misses">0</dd></div>
+        </dl>
+        <p class="hint">Sense teclat MIDI? Toca amb el ratolí sobre el piano, o activa «Tocar amb l'ordinador» a dalt i fes servir les lletres
+          <kbd>A</kbd> <kbd>W</kbd> <kbd>S</kbd> <kbd>E</kbd> <kbd>D</kbd> <kbd>F</kbd> <kbd>T</kbd>
+          <kbd>G</kbd> <kbd>Y</kbd> <kbd>H</kbd> <kbd>U</kbd> <kbd>J</kbd> <kbd>K</kbd>
+          (les lletres surten sobre les tecles; <kbd>Z</kbd>/<kbd>X</kbd> canvien l'octava).
+          A la consola hi ha el registre detallat.</p>
+        <p class="hint" id="guide-note" hidden>Nivell 3: el teclat suggereix una manera de tocar el contorn; qualsevol nota de l'acord que segueixi el contorn és correcta.</p>
+      </aside>
+      <div class="piano">
+        <div class="piano-bar">
+          <span>Teclat <span id="audio-info" class="audio-info"></span></span>
+          <button type="button" id="orientation" class="chip small" title="Canvia la disposició del teclat">↕ Vertical</button>
+        </div>
+        <div class="piano-canvas"><canvas id="piano"></canvas></div>
+      </div>
+    </div>
+  </main>
+  </div>
+
+  <div id="learn-view" class="learn-view" hidden>
+    <div id="learn-sections" class="learn-sections"></div>
+    <div class="piano learn-piano">
+      <div class="piano-bar"><span>Teclat · toca amb MIDI, amb el ratolí o amb les lletres de l'ordinador (opció a dalt)</span></div>
+      <div class="piano-canvas"><canvas id="learn-piano"></canvas></div>
+    </div>
+  </div>
+
+  <div id="result" class="result" hidden>
+    <div class="result-box" role="dialog" aria-modal="true" aria-labelledby="result-title">
+      <h2 id="result-title"></h2>
+      <p id="result-stars" class="result-stars"></p>
+      <p id="result-text"></p>
+      <div class="actions">
+        <button type="button" id="result-ok">D'acord</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

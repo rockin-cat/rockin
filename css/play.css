@@ -1,0 +1,3056 @@
+/* "Juga": the guided game. A dark, colourful look of its own. */
+
+body.play-theme {
+  --play-bg: #120d2e;
+  --play-bg-2: #231a55;
+  --play-panel: rgb(255 255 255 / 7%);
+  --play-line: rgb(255 255 255 / 14%);
+  --play-ink: #f5f3ff;
+  --play-muted: #b7b0dc;
+  --play-yellow: #ffc012;
+  --play-cyan: #36c5f0;
+  --play-pink: #ff5c8a;
+  --play-green: #3ddc84;
+  --play-red: #ff6b6b;
+  background: radial-gradient(1200px 700px at 20% -10%, var(--play-bg-2), transparent 60%),
+    radial-gradient(900px 600px at 110% 10%, #3a1650, transparent 60%), var(--play-bg);
+  background-attachment: fixed;
+  color: var(--play-ink);
+}
+
+body.play-theme .topbar {
+  color: var(--play-ink);
+  background: rgb(10 7 30 / 70%);
+  border-bottom-color: var(--play-line);
+  backdrop-filter: blur(6px);
+}
+
+body.play-theme h1 span,
+body.play-theme .status,
+body.play-theme .toggle {
+  color: var(--play-muted);
+}
+
+body.play-theme .views {
+  background: rgb(255 255 255 / 8%);
+}
+
+body.play-theme button.view-tab {
+  color: var(--play-ink);
+}
+
+.play-view {
+  padding: 18px 20px 40px;
+}
+
+.play-view kbd {
+  color: var(--play-ink);
+  background: rgb(255 255 255 / 12%);
+  border-color: var(--play-line);
+}
+
+/* ---- Buttons and small controls ----------------------------------------------------- */
+
+button.play-btn {
+  padding: 12px 22px;
+  font-size: 17px;
+  font-weight: 800;
+  border-radius: 14px;
+  border: 0;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+
+button.play-btn.primary {
+  color: #1d1d1f;
+  background: var(--play-yellow);
+  box-shadow: 0 5px 0 #c48d00, 0 10px 24px rgb(255 192 18 / 25%);
+}
+
+button.play-btn.primary:hover {
+  transform: translateY(-1px);
+}
+
+button.play-btn.primary:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #c48d00;
+}
+
+button.play-btn.ghost {
+  color: var(--play-ink);
+  background: rgb(255 255 255 / 8%);
+  box-shadow: inset 0 0 0 2px var(--play-line);
+}
+
+button.play-btn.ghost:hover {
+  background: rgb(255 255 255 / 14%);
+}
+
+button.play-btn.small {
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+.play-chip {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--play-ink);
+  background: rgb(255 255 255 / 8%);
+  border: 2px solid var(--play-line);
+  border-radius: 999px;
+}
+
+.play-chip.on {
+  color: #1d1d1f;
+  background: var(--play-cyan);
+  border-color: var(--play-cyan);
+}
+
+.play-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--play-muted);
+  cursor: pointer;
+}
+
+.play-toggle input {
+  accent-color: var(--play-cyan);
+}
+
+.play-kicker {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--play-cyan);
+}
+
+/* ---- Map ------------------------------------------------------------------------------ */
+
+.play-map {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.play-map-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px 24px;
+  margin-bottom: 14px;
+}
+
+.play-map-head h2 {
+  margin: 4px 0;
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.1;
+}
+
+.play-total {
+  display: inline-block;
+  padding: 4px 14px;
+  font-size: 20px;
+  font-weight: 800;
+  background: rgb(255 192 18 / 14%);
+  border-radius: 999px;
+}
+
+.play-total span {
+  color: var(--play-yellow);
+}
+
+.play-resume {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, rgb(255 192 18 / 18%), rgb(255 92 138 / 14%));
+  border: 2px solid rgb(255 192 18 / 50%);
+  border-radius: 18px;
+}
+
+.play-resume small {
+  color: var(--play-muted);
+}
+
+.play-resume strong {
+  font-size: 20px;
+}
+
+.play-settings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 18px;
+  color: var(--play-muted);
+  font-size: 14px;
+}
+
+.play-world {
+  margin-bottom: 18px;
+  padding: 18px 18px 8px;
+  background: var(--play-panel);
+  border: 1px solid var(--play-line);
+  border-radius: 22px;
+}
+
+.play-world-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+
+.play-world-number {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+  font-weight: 900;
+  color: #1d1d1f;
+  background: var(--play-yellow);
+  border-radius: 14px;
+  transform: rotate(-6deg);
+  box-shadow: 0 4px 0 #c48d00;
+}
+
+.play-world-text {
+  flex: 1 1 260px;
+}
+
+.play-world-text h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.play-world-text p {
+  margin: 2px 0 0;
+  color: var(--play-muted);
+}
+
+.play-world-text b {
+  color: var(--play-ink);
+}
+
+.play-world-stars {
+  font-weight: 800;
+  color: var(--play-yellow);
+}
+
+.play-goal-chords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.play-chord-chip {
+  min-width: 44px;
+  padding: 4px 10px;
+  font-size: 15px;
+  font-weight: 800;
+  text-align: center;
+  color: var(--play-muted);
+  background: rgb(255 255 255 / 5%);
+  border: 2px dashed var(--play-line);
+  border-radius: 10px;
+}
+
+.play-chord-chip.on {
+  color: #1d1d1f;
+  background: var(--play-cyan);
+  border: 2px solid var(--play-cyan);
+}
+
+.play-chord-chip.new,
+.play-chord-chip.now {
+  color: #1d1d1f;
+  background: var(--play-yellow);
+  border: 2px solid var(--play-yellow);
+}
+
+.play-chord-chip.now {
+  animation: glow 1.4s ease-in-out infinite;
+}
+
+@keyframes glow {
+  50% {
+    box-shadow: 0 0 0 6px rgb(255 192 18 / 30%);
+  }
+}
+
+/* The path: nodes in a line, joined by a dashed road. */
+.play-path {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 0;
+  margin: 16px 0 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.play-path li {
+  position: relative;
+  flex: 1 1 130px;
+  display: flex;
+  justify-content: center;
+}
+
+.play-path li + li::before {
+  content: "";
+  position: absolute;
+  top: 34px;
+  right: calc(50% + 34px);
+  left: calc(-50% + 34px);
+  border-top: 4px dashed var(--play-line);
+}
+
+button.play-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 130px;
+  padding: 0 4px 8px;
+  color: var(--play-ink);
+  background: none;
+  border: 0;
+}
+
+.play-node-dot {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--play-ink);
+  background: #2d2566;
+  border: 3px solid var(--play-line);
+  border-radius: 50%;
+  box-shadow: 0 5px 0 #0c0826;
+  transition: transform 0.12s;
+}
+
+button.play-node:hover:not(:disabled) .play-node-dot {
+  transform: translateY(-3px) scale(1.04);
+}
+
+.play-node.chord .play-node-dot,
+.play-node.song .play-node-dot {
+  background: #3b1f6b;
+}
+
+.play-node.mix .play-node-dot {
+  color: #1d1d1f;
+  background: var(--play-pink);
+  border-color: #ff9ab8;
+}
+
+.play-node.done .play-node-dot {
+  color: #1d1d1f;
+  background: var(--play-cyan);
+  border-color: #9be3fa;
+}
+
+.play-node.next .play-node-dot {
+  color: #1d1d1f;
+  background: var(--play-yellow);
+  border-color: #ffe38a;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+button.play-node:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.play-node-type {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--play-muted);
+}
+
+.play-node-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.play-node-stars {
+  min-height: 1em;
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: var(--play-yellow);
+}
+
+.play-map > .play-toggle {
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+/* ---- Mission ------------------------------------------------------------------------ */
+
+.play-mission {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.play-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.play-hud {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  padding: 10px 16px;
+  background: var(--play-panel);
+  border: 1px solid var(--play-line);
+  border-radius: 16px;
+}
+
+.play-hud-text {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+}
+
+.play-hud-text small,
+.play-hud-goal small {
+  font-size: 12px;
+  color: var(--play-muted);
+}
+
+.play-hud-text strong {
+  font-size: 20px;
+}
+
+.play-hud-goal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.play-hud-steps {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.play-hud-steps li {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--play-muted);
+  background: rgb(255 255 255 / 6%);
+  border: 2px solid var(--play-line);
+  border-radius: 50%;
+}
+
+.play-hud-steps li.done {
+  color: #1d1d1f;
+  background: var(--play-cyan);
+  border-color: var(--play-cyan);
+}
+
+.play-hud-steps li.now {
+  color: #1d1d1f;
+  background: var(--play-yellow);
+  border-color: var(--play-yellow);
+  transform: scale(1.15);
+}
+
+.play-stars {
+  font-size: 26px;
+  letter-spacing: 3px;
+  color: var(--play-yellow);
+  white-space: nowrap;
+}
+
+/* Panel */
+.play-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4px 24px;
+  margin-bottom: 14px;
+  padding: 18px 22px;
+  font-size: 17px;
+  line-height: 1.5;
+  background: var(--play-panel);
+  border: 2px solid var(--play-line);
+  border-radius: 22px;
+  animation: slide-in 0.25s ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.play-panel.good {
+  border-color: rgb(61 220 132 / 60%);
+  background: linear-gradient(160deg, rgb(61 220 132 / 14%), var(--play-panel));
+}
+
+.play-panel.bad {
+  border-color: rgb(255 107 107 / 55%);
+}
+
+.play-panel h2 {
+  margin: 4px 0 10px;
+  font-size: 30px;
+  line-height: 1.15;
+}
+
+.play-panel p {
+  margin: 0 0 10px;
+}
+
+.play-panel ul {
+  margin: 0 0 12px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.play-panel li {
+  display: block;
+}
+
+.play-panel li .legend {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.play-panel li + li {
+  margin-top: 6px;
+}
+
+.play-panel b {
+  color: var(--play-yellow);
+}
+
+.play-note {
+  font-size: 15px;
+  color: var(--play-muted);
+}
+
+.play-panel.good .play-note,
+.play-panel.bad .play-note {
+  font-weight: 700;
+  color: var(--play-ink);
+}
+
+.play-keys kbd {
+  font-size: 13px;
+}
+
+.legend {
+  flex: none;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.legend.white {
+  background: #fff;
+}
+
+.legend.bar {
+  width: 34px;
+  border-radius: 6px;
+  background: #00c2c7;
+}
+
+.legend.half {
+  background: linear-gradient(90deg, #36b3ff 46%, transparent 46%, transparent 54%, #36b3ff 54%);
+}
+
+.play-thumbs {
+  display: flex;
+  gap: 8px;
+  margin: 4px 0 10px;
+}
+
+.play-thumbs img {
+  width: 70px;
+  aspect-ratio: 1109 / 1558;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 40%);
+}
+
+.play-big {
+  margin: 4px 0 8px;
+}
+
+.play-result-stars {
+  display: flex;
+  gap: 8px;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.play-result-stars span {
+  color: rgb(255 255 255 / 15%);
+  animation: star-in 0.4s ease-out both;
+}
+
+.play-result-stars span.on {
+  color: var(--play-yellow);
+  text-shadow: 0 0 18px rgb(255 192 18 / 60%);
+}
+
+@keyframes star-in {
+  from {
+    opacity: 0;
+    transform: scale(0.3) rotate(-30deg);
+  }
+}
+
+.play-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.play-dots span {
+  width: 26px;
+  height: 26px;
+  background: rgb(255 255 255 / 6%);
+  border: 3px solid var(--play-line);
+  border-radius: 50%;
+}
+
+.play-dots span.on {
+  background: var(--play-green);
+  border-color: var(--play-green);
+  animation: star-in 0.25s ease-out;
+}
+
+.play-dots span.miss {
+  background: var(--play-red);
+  border-color: var(--play-red);
+}
+
+.play-dots span.now {
+  border-color: var(--play-yellow);
+  box-shadow: 0 0 0 3px rgb(255 192 18 / 35%);
+}
+
+.play-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Keyboard */
+.play-piano {
+  margin-top: 16px;
+  border: 2px solid var(--play-line);
+  border-radius: 16px;
+  transition: opacity 0.25s, filter 0.25s;
+}
+
+.play-piano .piano-canvas {
+  height: clamp(140px, 20vh, 190px);
+}
+
+/* Where to look: while the card leads, the keyboard steps back. */
+.play-mission[data-focus="card"] .play-piano:not(.demo) {
+  opacity: 0.45;
+  filter: saturate(0.6);
+}
+
+.play-mission[data-focus="keys"] .play-piano {
+  box-shadow: 0 0 0 3px var(--play-yellow), 0 12px 40px rgb(255 192 18 / 20%);
+}
+
+.play-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .play-node.next .play-node-dot,
+  .play-chord-chip.now,
+  .play-panel,
+  .play-result-stars span,
+  .play-dots span.on {
+    animation: none;
+  }
+}
+
+/* ---- Path tabs and path creator ------------------------------------------------------------------ */
+
+.play-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+button.play-tab {
+  padding: 7px 14px;
+  font-weight: 800;
+  color: var(--play-ink);
+  background: var(--play-panel);
+  border: 2px solid var(--play-line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+button.play-tab.on {
+  color: #1d1d1f;
+  background: var(--play-yellow);
+  border-color: var(--play-yellow);
+}
+
+button.play-tab.add {
+  border-style: dashed;
+}
+
+button.play-tab.add.on {
+  border-style: solid;
+}
+
+.play-creator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px 16px;
+  margin: 12px 0;
+}
+
+.play-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  font-weight: 700;
+}
+
+.play-field small {
+  font-weight: 400;
+  color: var(--play-muted);
+}
+
+.play-field input,
+.play-field select {
+  width: 100%;
+  min-width: 0;
+  padding: 7px 9px;
+  font: inherit;
+  font-weight: 400;
+  color: var(--play-ink);
+  background: rgb(0 0 0 / 30%);
+  border: 1px solid var(--play-line);
+  border-radius: 8px;
+}
+
+.play-field select option {
+  color: #1d1d1f;
+}
+
+.play-creator-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 12px;
+}
+
+.play-creator-preview:empty {
+  display: none;
+}
+
+.bad-text {
+  color: var(--play-red);
+}
+
+.bad-text:empty {
+  display: none;
+}
+
+.play-map-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+
+
+/* ---- Panel: explanation above the score, one line while playing ---------------------------------- */
+
+.play-panel-main {
+  flex: 1 1 420px;
+  min-width: 0;
+}
+
+.play-panel .play-buttons {
+  flex: 0 1 auto;
+  justify-content: flex-end;
+}
+
+.play-panel.status {
+  align-items: center;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 16px;
+  animation: none;
+}
+
+.play-panel.status .play-panel-main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+}
+
+.play-panel.status .play-buttons {
+  margin-top: 0;
+}
+
+.play-panel.status.listen {
+  border-color: #8f7cff;
+  background: linear-gradient(90deg, rgb(111 91 216 / 35%), var(--play-panel));
+}
+
+.play-panel.status.ready {
+  border-color: var(--play-yellow);
+  background: linear-gradient(90deg, rgb(255 192 18 / 25%), var(--play-panel));
+}
+
+.play-muted {
+  font-size: 13px;
+  color: var(--play-muted);
+}
+
+.play-reflect {
+  margin: 10px 0 4px;
+}
+
+.play-reflect > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.play-reflect .play-chip {
+  font-size: 14px;
+}
+
+/* ---- Score of cards ----------------------------------------------------------------------------- */
+
+.play-score {
+  --score-columns: 4;
+  --score-rows: 1;
+  /* How much room the cards get (--score-h), how big one may get (--score-cap)
+     and how big it can actually be so that every row fits without scrolling:
+     each row spends about 69px on the chord and the label above the card. */
+  --score-h: clamp(200px, calc(100vh - 580px), 46vh);
+  --score-cap: 27vh;
+  --score-card: min(var(--score-cap), max(150px, calc((var(--score-h) / var(--score-rows) - 78px) * 1.6)));
+  position: relative;
+}
+
+.score-scroll {
+  position: relative;
+  max-height: var(--score-h);
+  padding: 22px 4px 8px;
+  overflow-y: auto;
+  border-radius: 16px;
+  scrollbar-width: thin;
+}
+
+.score-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.score-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* When every row is a single card (the wheel on one card), the rows go side by
+   side: everything that has to be played is on the screen at once, with no
+   scrolling and without making the cards tiny. */
+.play-score.side .score-rows {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+/* Each card keeps its own width: the label above it wraps instead of pushing
+   the next card onto another line. */
+.play-score.side .score-row {
+  width: var(--score-card);
+}
+
+.play-score.side {
+  --score-card: min(var(--score-cap), calc((var(--score-h) - 112px) * 1.6), calc((86vw - 60px) / var(--score-total)), calc((1180px - 60px) / var(--score-total)));
+}
+
+.score-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.score-row-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--play-muted);
+}
+
+.score-row.listen .score-row-label {
+  color: #b9adff;
+}
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--score-columns), minmax(0, var(--score-card)));
+  gap: 10px;
+}
+
+.play-score.few {
+  --score-cap: 36vh;
+}
+
+.score-tile {
+  min-width: 0;
+  transition: transform 0.15s ease, opacity 0.2s ease;
+}
+
+.score-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 4px;
+}
+
+.score-head b {
+  font-size: clamp(16px, 2.2vw, 24px);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.score-head small {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--play-cyan);
+  white-space: nowrap;
+}
+
+.score-card {
+  position: relative;
+  aspect-ratio: 1.6;
+  overflow: hidden;
+  background: #f4f1ea;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 35%);
+}
+
+.score-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.score-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.score-tile.now .score-card {
+  border-color: var(--play-cyan);
+  box-shadow: 0 0 0 3px rgb(54 197 240 / 35%), 0 10px 26px rgb(0 0 0 / 45%);
+}
+
+.score-tile.now {
+  transform: translateY(-2px);
+}
+
+.score-tile.ok .score-card {
+  border-color: var(--play-green);
+}
+
+.score-tile.miss .score-card {
+  border-color: var(--play-red);
+}
+
+.score-tile.past {
+  opacity: 0.55;
+}
+
+.score-tile.soon .score-card {
+  border-color: #ffb37a;
+  animation: next-soon 0.5s ease-in-out infinite alternate;
+}
+
+.score-tile.soon .score-head small {
+  color: #ffb37a;
+}
+
+@keyframes next-soon {
+  to {
+    box-shadow: 0 0 0 5px rgb(255 179 122 / 45%);
+  }
+}
+
+/* Listening: a hand on the card says "don't play yet"; the ball stays visible above it. */
+.score-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 6px 10px;
+  color: #fff;
+  background: linear-gradient(0deg, rgb(35 26 85 / 78%), rgb(35 26 85 / 30%) 55%, rgb(35 26 85 / 10%));
+  pointer-events: none;
+}
+
+.score-hand {
+  font-size: clamp(26px, 4vw, 44px);
+  line-height: 1;
+  filter: drop-shadow(0 3px 6px rgb(0 0 0 / 40%));
+}
+
+.score-cover strong {
+  font-size: clamp(14px, 2vw, 22px);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 0 rgb(0 0 0 / 35%);
+}
+
+.score-tile.demo.now .score-hand {
+  animation: listen-hand 0.9s ease-in-out infinite alternate;
+}
+
+.score-cover.shake {
+  animation: listen-shake 0.4s ease;
+}
+
+@keyframes listen-hand {
+  to {
+    transform: scale(1.15) rotate(-8deg);
+  }
+}
+
+@keyframes listen-shake {
+  20%, 60% {
+    transform: translateX(-7px);
+  }
+  40%, 80% {
+    transform: translateX(7px);
+  }
+}
+
+.score-tile.ready .score-card {
+  background: var(--play-yellow);
+}
+
+.score-ready {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 6%;
+  color: #1d1d1f;
+}
+
+.score-ready b {
+  font-size: clamp(16px, 2.4vw, 26px);
+  font-weight: 900;
+}
+
+.score-ready span {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.score-tile.ready .score-head b {
+  color: var(--play-yellow);
+}
+
+/* ---- Students, map bar ----------------------------------------------------------------------------- */
+
+.play-map-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.play-who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  color: var(--play-muted);
+}
+
+.play-who b {
+  color: var(--play-ink);
+}
+
+.play-who .play-btn {
+  margin: 0;
+}
+
+.play-who-screen {
+  max-width: 720px;
+  margin: 24px auto;
+}
+
+.play-who-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 12px 0 18px;
+}
+
+.play-who-new {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.play-who-new input {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--play-ink);
+  background: rgb(0 0 0 / 30%);
+  border: 1px solid var(--play-line);
+  border-radius: 10px;
+}
+
+/* ---- Teacher view --------------------------------------------------------------------------------- */
+
+.teacher-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.teacher-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.teacher-table th,
+.teacher-table td {
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--play-line);
+}
+
+.teacher-table thead th {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--play-muted);
+}
+
+.teacher-table.small {
+  font-size: 13px;
+}
+
+.teacher-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.teacher-actions .play-btn {
+  padding: 3px 8px;
+  font-size: 11px;
+}
+
+.teacher-worlds {
+  display: flex;
+  gap: 4px;
+}
+
+.teacher-world {
+  position: relative;
+  width: 28px;
+  height: 10px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 10%);
+  border-radius: 5px;
+}
+
+.teacher-world i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--play-yellow);
+}
+
+.teacher-detail {
+  margin-top: 10px;
+}
+
+.play-field.inline {
+  flex-direction: row;
+  align-items: center;
+  max-width: 360px;
+}
+
+/* ---- Printable sheet: one A4 page, landscape --------------------------------------------------- */
+
+/* Off screen until printed, so its height can be measured and fitted to the page. */
+.print-box {
+  position: absolute;
+  top: 0;
+  left: -10000px;
+  width: 273mm;
+  background: #fff;
+}
+
+@media print {
+  body.printing > *:not(.print-box) {
+    display: none !important;
+  }
+
+  body.printing {
+    color: #111;
+    background: #fff !important;
+  }
+
+  body.printing .print-box {
+    position: static;
+    width: auto;
+  }
+}
+
+@media not print {
+  body:not(.printing) .print-box {
+    display: none;
+  }
+}
+
+@page {
+  size: A4 landscape;
+  margin: 12mm;
+}
+
+.print-sheet {
+  font: 10.5pt/1.4 system-ui, sans-serif;
+  color: #111;
+}
+
+.print-sheet header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 6px;
+  border-bottom: 3px solid #fcbe12;
+}
+
+.sheet-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sheet-brand img {
+  height: 44px;
+  width: auto;
+}
+
+.print-sheet h2 {
+  margin: 0;
+  font-size: 18pt;
+}
+
+.print-sheet h3 {
+  margin: 10px 0 6px;
+  font-size: 12.5pt;
+}
+
+.print-sheet h4 {
+  margin: 0 0 2px;
+  font-size: 12pt;
+}
+
+.print-sheet section {
+  break-inside: avoid;
+}
+
+.sheet-name {
+  font-size: 12pt;
+}
+
+.sheet-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr 1fr;
+  gap: 18px;
+}
+
+.sheet-wheel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.sheet-wheel span {
+  min-width: 54px;
+  padding: 4px 10px;
+  font-size: 16pt;
+  font-weight: 800;
+  text-align: center;
+  border: 2px solid #111;
+  border-radius: 8px;
+}
+
+.sheet-structure {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+}
+
+.sheet-chords {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.sheet-inv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.sheet-chord {
+  padding: 6px 8px;
+  border: 1px solid #999;
+  border-radius: 8px;
+  break-inside: avoid;
+}
+
+.sheet-chord.small h4 {
+  font-size: 9.5pt;
+}
+
+.sheet-chord p {
+  margin: 3px 0 0;
+  font-size: 9.5pt;
+}
+
+.sheet-keys {
+  width: 100%;
+  height: auto;
+}
+
+.sheet-changes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.sheet-change {
+  padding: 4px;
+  border: 1px solid #999;
+  border-radius: 8px;
+  break-inside: avoid;
+}
+
+.sheet-change-head {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+  font-size: 9pt;
+}
+
+.sheet-change-head .sheet-deg {
+  padding: 0 5px;
+  border-radius: 4px;
+}
+
+.sheet-change .change-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sheet-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.sheet-cards img {
+  width: 50px;
+  aspect-ratio: 1109 / 1558;
+  object-fit: cover;
+  border: 1px solid #999;
+  border-radius: 3px;
+}
+
+.sheet-hint {
+  margin: 4px 0 0;
+  font-size: 9pt;
+  color: #444;
+}
+
+.sheet-check {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheet-check li {
+  margin-bottom: 5px;
+}
+
+.sheet-check li::before {
+  content: "☐ ";
+  font-size: 13pt;
+}
+
+@media (max-width: 700px) {
+  .play-panel {
+    padding: 14px 16px;
+  }
+
+  .play-panel h2 {
+    font-size: 24px;
+  }
+
+  .score-grid {
+    gap: 6px;
+  }
+
+  .play-score .score-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .play-score.few .score-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .play-top {
+    flex-wrap: wrap;
+  }
+}
+
+.play-fx {
+  width: 100%;
+  height: 100%;
+}
+
+.play-panel-side {
+  flex: 1 1 320px;
+  min-width: 0;
+  font-size: 15px;
+}
+
+.play-panel-side ul {
+  margin: 0 0 8px;
+}
+
+.play-panel.with-side .play-buttons {
+  flex-basis: 100%;
+}
+
+.score-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 2px 4px 0;
+  font-size: 12px;
+  color: var(--play-muted);
+}
+
+.score-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.score-legend i {
+  display: inline-grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.lg-dot {
+  background: #1f9d55;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.lg-x {
+  color: #ff6b6b;
+}
+
+.lg-ring {
+  border: 3px solid #d64545;
+  border-radius: 50%;
+}
+
+.lg-ring.warn {
+  border-color: #f08a00;
+}
+
+.teacher .teacher-actions .play-btn {
+  padding: 3px 8px;
+  font-size: 11px;
+  box-shadow: none;
+}
+
+/* ---- Simple student map ------------------------------------------------------------------------ */
+
+.play-hello {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin: 8px 0 22px;
+}
+
+.play-hello h2 {
+  margin: 4px 0 8px;
+  font-size: clamp(30px, 5vw, 44px);
+  line-height: 1.05;
+}
+
+.play-hello .play-resume {
+  min-width: min(100%, 340px);
+}
+
+.play-hello .play-resume .play-btn {
+  align-self: stretch;
+  font-size: 22px;
+}
+
+details.play-world > summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+details.play-world > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.play-world {
+  padding-bottom: 18px;
+}
+
+details.play-world[open] > .play-goal-chords {
+  margin-top: 12px;
+}
+
+details.play-world.current {
+  border: 2px solid rgb(255 192 18 / 60%);
+  box-shadow: 0 0 0 4px rgb(255 192 18 / 10%);
+}
+
+details.play-world.done .play-world-number {
+  background: var(--play-green);
+  box-shadow: 0 4px 0 #1f9d55;
+}
+
+details.play-world.locked {
+  opacity: 0.55;
+}
+
+details.play-world.locked > summary {
+  cursor: default;
+}
+
+details.play-world.locked .play-world-number {
+  background: rgb(255 255 255 / 12%);
+  box-shadow: none;
+}
+
+.play-map-foot .play-btn {
+  margin: 0;
+}
+
+.play-btn.small {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.play-teacher-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-bottom: 16px;
+}
+
+.play-teacher-top h2 {
+  margin: 0;
+}
+
+.play-world h3 {
+  margin: 0 0 10px;
+}
+
+/* Progress of the world on the mission screen. */
+.play-hud-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 120px;
+}
+
+.play-hud-progress small {
+  font-size: 12px;
+  color: var(--play-muted);
+}
+
+.play-hud-bar {
+  display: flex;
+  gap: 3px;
+}
+
+.play-hud-bar i {
+  flex: 1;
+  min-width: 8px;
+  height: 8px;
+  background: rgb(255 255 255 / 12%);
+  border-radius: 4px;
+}
+
+.play-hud-bar i.done {
+  background: var(--play-cyan);
+}
+
+.play-hud-bar i.now {
+  background: var(--play-yellow);
+  box-shadow: 0 0 0 2px rgb(255 192 18 / 35%);
+}
+
+/* ---- Welcome (first time) ---------------------------------------------------------------------- */
+
+.play-welcome {
+  max-width: 640px;
+  margin: 24px auto;
+  padding: 28px;
+  text-align: center;
+}
+
+.play-welcome h2 {
+  margin: 16px 0 8px;
+  font-size: clamp(26px, 4vw, 36px);
+}
+
+.play-welcome p {
+  font-size: 19px;
+  line-height: 1.5;
+}
+
+.play-welcome b {
+  color: var(--play-yellow);
+}
+
+.play-welcome .play-dots,
+.play-welcome .play-buttons {
+  justify-content: center;
+}
+
+.welcome-art {
+  font-size: 64px;
+  line-height: 1.2;
+}
+
+.welcome-art.big {
+  font-size: 96px;
+}
+
+.welcome-art.stars {
+  color: var(--play-yellow);
+  letter-spacing: 8px;
+  text-shadow: 0 0 20px rgb(255 192 18 / 50%);
+}
+
+.welcome-card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  width: min(100%, 320px);
+  margin: 0 auto;
+  padding: 60px 20px 30px;
+  background: #f4f1ea;
+  border-radius: 16px;
+}
+
+.welcome-card i {
+  width: 52px;
+  height: 52px;
+  background: #36b3ff;
+  border-radius: 50%;
+}
+
+.welcome-card i.rest {
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 10%);
+}
+
+.welcome-ball {
+  position: absolute;
+  top: 34px;
+  left: calc(50% - 109px);
+  width: 20px;
+  height: 20px;
+  background: var(--play-yellow);
+  border: 2px solid #1d1d1f;
+  border-radius: 50%;
+  animation: welcome-ball 2.4s linear infinite;
+}
+
+@keyframes welcome-ball {
+  0% { transform: translate(0, 0); }
+  12.5% { transform: translate(33px, -26px); }
+  25% { transform: translate(66px, 0); }
+  37.5% { transform: translate(99px, -26px); }
+  50% { transform: translate(132px, 0); }
+  62.5% { transform: translate(165px, -26px); }
+  75% { transform: translate(198px, 0); }
+  87.5% { transform: translate(115px, -40px); }
+  100% { transform: translate(0, 0); }
+}
+
+.welcome-keys {
+  display: flex;
+  justify-content: center;
+  width: min(100%, 320px);
+  height: 120px;
+  margin: 0 auto;
+}
+
+.welcome-keys i {
+  flex: 1;
+  background: #fbfbf8;
+  border: 1px solid #b9b4ab;
+  border-radius: 0 0 6px 6px;
+}
+
+.welcome-keys i.on {
+  background: #ffe38a;
+  animation: key-glow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes key-glow {
+  to { background: #ffc012; }
+}
+
+/* Moving dots over the keyboard. */
+.piano canvas.piano-anim {
+  z-index: 3;
+  pointer-events: none;
+}
+
+.welcome-logo {
+  width: min(100%, 380px);
+  height: auto;
+}
+
+/* ---- Map boards: the path and the chord workshop ------------------------------------------------ */
+
+.play-board-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 4px 0 10px;
+}
+
+button.play-board-tab {
+  flex: 1 1 0;
+  max-width: 280px;
+  padding: 12px 16px;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--play-ink);
+  background: var(--play-panel);
+  border: 2px solid var(--play-line);
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+button.play-board-tab.on {
+  color: #1d1d1f;
+  background: var(--play-yellow);
+  border-color: var(--play-yellow);
+  box-shadow: 0 4px 0 #c48d00;
+}
+
+/* ---- Workshop games: one big question ------------------------------------------------------------ */
+
+.play-target {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: min(100%, 360px);
+  padding: 14px 22px;
+  background: rgb(255 255 255 / 6%);
+  border: 3px solid var(--play-yellow);
+  border-radius: 20px;
+}
+
+.play-target small {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--play-muted);
+}
+
+.play-target strong {
+  font-size: clamp(38px, 6vw, 60px);
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--play-yellow);
+}
+
+.play-target span {
+  font-size: 16px;
+  color: var(--play-muted);
+}
+
+.play-target.good {
+  border-color: var(--play-green);
+  animation: star-in 0.3s ease-out;
+}
+
+.play-target.good strong {
+  color: var(--play-green);
+}
+
+.play-target.bad {
+  border-color: var(--play-red);
+  animation: listen-shake 0.35s ease;
+}
+
+.play-clock {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--play-cyan);
+}
+
+/* ---- Songs ------------------------------------------------------------------------------------------ */
+
+.play-songs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.play-song {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px;
+  background: rgb(255 255 255 / 6%);
+  border: 2px solid var(--play-line);
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.play-song:hover,
+.play-song:focus-visible {
+  border-color: var(--play-yellow);
+}
+
+.play-song strong {
+  font-size: 20px;
+}
+
+.play-song small {
+  color: var(--play-muted);
+}
+
+.play-song-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  color: #1d1d1f;
+  background: var(--play-cyan);
+  border-radius: 12px;
+}
+
+.play-song-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+  color: var(--play-muted);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.play-song-remove:hover {
+  color: var(--play-red);
+  border-color: var(--play-red);
+}
+
+button.play-song-quick {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 12px 14px;
+  text-align: left;
+  color: var(--play-ink);
+  background: rgb(255 255 255 / 4%);
+  border: 1px dashed var(--play-line);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+button.play-song-quick:hover {
+  border-color: var(--play-cyan);
+}
+
+button.play-song-quick span {
+  font-size: 13px;
+  color: var(--play-muted);
+}
+
+.play-board-tabs .play-btn {
+  margin: 0;
+}
+
+.play-teacher-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 12px;
+  padding: 10px 16px;
+  background: rgb(54 197 240 / 14%);
+  border: 2px solid var(--play-cyan);
+  border-radius: 14px;
+}
+
+.play-teacher-banner .play-btn {
+  margin: 0;
+}
+
+/* ---- Adaptive path ("Camí intel·ligent") ------------------------------------------------------------ */
+
+.play-board-tabs {
+  flex-wrap: wrap;
+}
+
+.play-hud-bar i.weak {
+  background: var(--play-pink);
+}
+
+.play-adapt-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.play-adapt-bar {
+  flex: 1;
+  max-width: 320px;
+  height: 12px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 12%);
+  border-radius: 6px;
+}
+
+.play-adapt-bar i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--play-cyan), var(--play-green));
+  border-radius: 6px;
+}
+
+.play-resume .play-note {
+  max-width: 240px;
+  margin: 0;
+  font-size: 13px;
+}
+
+.play-skills h3 {
+  margin-bottom: 6px;
+}
+
+.play-skill-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.play-skill-legend .play-skill {
+  cursor: default;
+  font-size: 12px;
+}
+
+.play-skill-row {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 8px 0;
+  border-top: 1px solid var(--play-line);
+}
+
+.play-skill-row small {
+  padding-top: 6px;
+  color: var(--play-muted);
+  font-weight: 700;
+}
+
+.play-skill-row > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.play-skill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 11px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--play-ink);
+  background: rgb(255 255 255 / 6%);
+  border: 2px solid var(--play-line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.play-skill.ok {
+  color: #0d2b1a;
+  background: var(--play-green);
+  border-color: var(--play-green);
+}
+
+.play-skill.inferred {
+  color: var(--play-green);
+  background: rgb(61 220 132 / 10%);
+  border: 2px dashed var(--play-green);
+}
+
+.play-skill.weak {
+  color: #2b0d14;
+  background: #ffa24c;
+  border-color: #ffa24c;
+}
+
+.play-skill.unknown {
+  color: var(--play-muted);
+}
+
+.play-skill.next {
+  box-shadow: 0 0 0 3px var(--play-yellow);
+}
+
+.play-learnt {
+  display: inline-block;
+  margin-top: 6px;
+  font-weight: 700;
+  color: var(--play-cyan);
+}
+
+@media (max-width: 640px) {
+  .play-skill-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  button.play-board-tab {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+/* ---- Chord colours by degree (as in the ROCKIN songbook) ------------------------------------------------ */
+
+.play-chord-chip.deg {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 3px 10px 2px;
+  line-height: 1.1;
+  color: var(--deg-ink);
+  background: var(--deg);
+  border: 2px solid var(--deg);
+  opacity: 0.4;
+}
+
+.play-chord-chip.deg i {
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+  opacity: 0.8;
+}
+
+.play-chord-chip.deg.on,
+.play-chord-chip.deg.now {
+  opacity: 1;
+}
+
+.play-chord-chip.deg.now {
+  color: var(--deg-ink);
+  background: var(--deg);
+  border-color: #fff;
+  box-shadow: 0 0 0 3px var(--play-yellow);
+}
+
+.play-borrowed {
+  padding: 0 6px;
+  color: #1d1d1f;
+  background: #f3b3ef;
+  border-radius: 6px;
+}
+
+.play-keystrip {
+  margin-bottom: 18px;
+  padding: 12px 18px;
+  background: var(--play-panel);
+  border: 1px solid var(--play-line);
+  border-radius: 22px;
+}
+
+.play-keystrip[open] .play-keystrip-head {
+  margin-bottom: 6px;
+}
+
+.play-keystrip-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.play-keystrip-mini {
+  display: flex;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.play-keystrip-mini i {
+  width: 22px;
+  height: 14px;
+}
+
+.play-functions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.play-function {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  background: rgb(255 255 255 / 5%);
+  border-radius: 12px;
+}
+
+.play-function small {
+  color: var(--play-muted);
+}
+
+.play-songgrid-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  margin-bottom: 8px;
+}
+
+.play-songgrid-head h3 {
+  margin: 0;
+}
+
+.play-grid-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.grid-part {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  overflow: hidden;
+  border: 1px solid var(--play-line);
+  border-radius: 10px;
+}
+
+.grid-name {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  font-weight: 900;
+  color: #1d1d1f;
+  background: #f89c1c;
+}
+
+.grid-bars {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-part .grid-row:only-child {
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+}
+
+.grid-cell {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 6px 10px;
+  border-right: 1px solid rgb(0 0 0 / 25%);
+  border-bottom: 1px solid rgb(0 0 0 / 15%);
+}
+
+.grid-cell b {
+  font-size: 17px;
+}
+
+.grid-cell i {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+  opacity: 0.75;
+}
+
+.play-songgrid .play-keystrip {
+  margin: 10px 0 0;
+  padding: 8px 0 0;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--play-line);
+  border-radius: 0;
+}
+
+.play-song.book {
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.play-song-artist {
+  margin-top: -4px;
+  color: var(--play-muted);
+}
+
+.play-song .play-chord-chip.deg {
+  min-width: 36px;
+  padding: 2px 6px;
+  font-size: 13px;
+}
+
+/* Printed sheet */
+.print-sheet .sheet-deg {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 5px;
+  border-color: #111;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.print-sheet .sheet-deg i {
+  font-size: 8pt;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.print-sheet h4.sheet-deg {
+  justify-content: space-between;
+  margin: -2px -4px 4px;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.sheet-part {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.sheet-part > b {
+  min-width: 40px;
+}
+
+.sheet-part > span {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+.sheet-part .sheet-deg {
+  min-width: 34px;
+  padding: 1px 5px;
+  font-size: 9pt;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .play-functions {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-part {
+    grid-template-columns: 56px 1fr;
+  }
+
+  .grid-cell {
+    padding: 5px 6px;
+  }
+
+  .grid-cell b {
+    font-size: 14px;
+  }
+}
+
+.score-head b.deg {
+  padding: 0 8px;
+  border-radius: 8px;
+}
+
+.score-head b.deg[data-degree]::after {
+  content: attr(data-degree);
+  margin-left: 5px;
+  font-size: 0.55em;
+  font-weight: 800;
+  opacity: 0.75;
+}
+
+/* ---- Chord change diagram ---------------------------------------------------------------------- */
+
+.cd-box {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 560px;
+  padding: 12px 14px;
+  color: #1d1d1f;
+  background: #fff;
+  border-radius: 18px;
+}
+
+.cd-box .change-diagram {
+  display: block;
+  width: 100%;
+  max-height: 260px;
+}
+
+.cd-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.cd-chip i {
+  font-style: normal;
+  color: var(--c);
+  -webkit-text-stroke: 1px #1d1d1f;
+}
+
+.cd-chip small {
+  font-size: 12px;
+  font-weight: 700;
+  color: #666;
+}
+
+.cd-arrow {
+  font-size: 22px;
+}
+
+.cd-badge {
+  padding: 2px 8px;
+  font-size: 13px;
+  font-weight: 800;
+  background: #eef2f6;
+  border-radius: 999px;
+}
+
+.cd-badge.pin,
+.cd-badge.same {
+  background: #c9f5d9;
+}
+
+.cd-words {
+  margin-top: 4px;
+  color: var(--play-muted);
+}
+
+.cd-words summary {
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* ---- Two hands ---------------------------------------------------------------------------------- */
+
+.legend.two {
+  background: linear-gradient(180deg, #3fb2f5 0 48%, transparent 48% 52%, #ff8a2a 52%);
+  border-radius: 4px;
+}
+
+.play-hands-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.play-welcome.play-hands {
+  max-width: 900px;
+}
+
+button.play-hands-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 18px 14px;
+  font: inherit;
+  color: var(--play-ink);
+  text-align: center;
+  background: rgb(255 255 255 / 6%);
+  border: 2px solid var(--play-line);
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+button.play-hands-option:hover,
+button.play-hands-option.on {
+  border-color: var(--play-yellow);
+  box-shadow: 0 0 0 3px rgb(255 192 18 / 30%);
+}
+
+.play-hands-art {
+  font-size: 44px;
+}
+
+button.play-hands-option strong {
+  font-size: 18px;
+}
+
+button.play-hands-option small {
+  color: var(--play-muted);
+}
+
+button.play-hands-chip {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+  padding: 5px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--play-ink);
+  background: rgb(255 255 255 / 8%);
+  border: 1px solid var(--play-line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+button.play-hands-chip b {
+  color: var(--play-yellow);
+}
+
+@media (max-width: 640px) {
+  .play-hands-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Teacher's guide ------------------------------------------------------------------------------ */
+
+.guide {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.guide-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 18px;
+}
+
+.guide-section {
+  scroll-margin-top: 12px;
+  padding-bottom: 14px;
+}
+
+.guide-body {
+  line-height: 1.55;
+}
+
+.guide-body h4 {
+  margin: 14px 0 4px;
+  color: var(--play-yellow);
+}
+
+.guide-body ul,
+.guide-body ol {
+  margin: 4px 0 8px;
+  padding-left: 22px;
+}
+
+.guide-body li {
+  margin-bottom: 4px;
+}
+
+.guide-body a[data-go] {
+  color: var(--play-cyan);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.guide-body code,
+.guide-body kbd {
+  padding: 1px 5px;
+  background: rgb(255 255 255 / 10%);
+  border-radius: 4px;
+}
+
+.guide-degrees {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.guide-degrees span {
+  min-width: 44px;
+  padding: 4px 10px;
+  font-weight: 900;
+  text-align: center;
+  color: #1d1d1f;
+  border-radius: 8px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@page guide {
+  size: A4 portrait;
+  margin: 14mm;
+}
+
+.print-guide {
+  page: guide;
+  font: 10.5pt/1.45 system-ui, sans-serif;
+  color: #111;
+}
+
+.print-guide h1 {
+  margin: 0 0 8px;
+  font-size: 20pt;
+  border-bottom: 3px solid #fcbe12;
+}
+
+.print-guide h2 {
+  margin: 14px 0 4px;
+  font-size: 14pt;
+  break-after: avoid;
+}
+
+.print-guide h4 {
+  margin: 8px 0 2px;
+  break-after: avoid;
+}
+
+.print-guide li {
+  break-inside: avoid;
+}
+
+.print-guide a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---- Level 2: arpeggios and melodic cards ------------------------------------------------------------ */
+
+.play-level-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 26px 0 12px;
+  padding: 14px 18px;
+  background: linear-gradient(90deg, rgb(255 192 18 / 22%), transparent);
+  border-left: 4px solid var(--play-yellow);
+  border-radius: 12px;
+}
+
+.play-level-head strong {
+  font-size: 20px;
+}
+
+.play-level-head span {
+  color: var(--play-muted);
+}
+
+.arp-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.arp-steps span {
+  padding: 6px 14px;
+  font-size: 20px;
+  font-weight: 900;
+  background: rgb(255 255 255 / 8%);
+  border: 2px solid var(--play-line);
+  border-radius: 12px;
+}
+
+.arp-steps span.on {
+  color: #0d2b1a;
+  background: var(--play-green);
+  border-color: var(--play-green);
+}
+
+.arp-steps span.now {
+  color: #1d1d1f;
+  background: var(--play-yellow);
+  border-color: var(--play-yellow);
+}
+
+.legend.line {
+  width: 34px;
+  border-radius: 0;
+  background: linear-gradient(135deg, transparent 45%, #1d1d1f 45% 55%, transparent 55%);
+  background-color: #fff;
+}
+
+.arp-steps {
+  align-items: center;
+}
+
+.arp-steps i {
+  font-style: normal;
+  font-size: 20px;
+  color: var(--play-muted);
+}
+
+.score-row-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.score-repeat {
+  padding: 1px 8px;
+  font-size: 13px;
+  letter-spacing: 0;
+  color: #1d1d1f;
+  background: var(--play-cyan);
+  border-radius: 999px;
+}
+
+.score-repeat.second {
+  background: var(--play-yellow);
+}
+
+/* Always a way out of the loop: small controls under the HUD. */
+.play-hud-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.play-hud-tools .play-btn.small {
+  padding: 4px 10px;
+  font-size: 13px;
+}
+
+/* Full screen in Juga: only the card, the keyboard and one line of text. */
+/* Full screen puts the whole game (mission and menus) in the screen, so the
+   mouse keeps working when you go back to the map. */
+.play-view:fullscreen {
+  overflow: auto;
+  background: var(--play-bg, #f7f4ef);
+}
+
+.play-mission.is-fullscreen {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100vh;
+  max-width: none;
+  overflow: hidden;
+  padding: 10px 14px;
+  background: var(--play-bg, #f7f4ef);
+}
+
+.play-mission.is-fullscreen .play-top {
+  padding: 2px 0;
+}
+
+.play-mission.is-fullscreen .play-hud-goal,
+.play-mission.is-fullscreen .play-hud-progress,
+.play-mission.is-fullscreen .score-legend,
+.play-mission.is-fullscreen .play-panel-side {
+  display: none;
+}
+
+.play-mission.is-fullscreen .play-panel {
+  padding: 8px 14px;
+}
+
+.play-mission.is-fullscreen .play-panel h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.play-mission.is-fullscreen .play-panel p {
+  margin: 2px 0;
+}
+
+.play-mission.is-fullscreen > div[hidden] {
+  display: none;
+}
+
+.play-mission.is-fullscreen .play-piano {
+  margin-top: auto;
+}
+
+/* In full screen the cards can be bigger: there is nothing else on the screen. */
+.play-mission.is-fullscreen .play-score {
+  --score-h: clamp(220px, calc(100vh - 420px), 62vh);
+  --score-cap: 34vh;
+}
+
+.play-mission.is-fullscreen .play-score.few {
+  --score-cap: 44vh;
+}
+
+/* What you could already do playing with your group. */
+.play-band-level {
+  margin: 12px 0;
+  padding: 12px 16px;
+  border: 1px solid var(--play-line);
+  border-radius: 16px;
+  background: var(--play-panel);
+}
+
+.play-band-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.play-band-head small {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+}
+
+.play-band-head strong {
+  font-size: 18px;
+}
+
+.play-band-dots {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.play-band-dots i {
+  width: 26px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--play-line);
+}
+
+.play-band-dots i.on {
+  background: var(--accent);
+}
+
+.play-band-level p {
+  margin: 4px 0 0;
+}
+
+.play-band-up {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--accent);
+}
+
+/* "Estudia una carta": the cards of a world, to practise one on its own. */
+.play-cardstrip {
+  margin: 4px 0 2px;
+  padding: 8px 10px 10px;
+  border-top: 1px dashed var(--play-line);
+}
+
+.play-cardstrip small {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 800;
+  color: var(--play-dim, #6b6b70);
+}
+
+.play-cardstrip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.play-cardpick {
+  width: 104px;
+  padding: 0;
+  overflow: hidden;
+  background: #f4f1ea;
+  border: 2px solid var(--play-line);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+.play-cardpick:hover,
+.play-cardpick:focus-visible {
+  border-color: var(--play-cyan);
+  transform: translateY(-2px);
+}
+
+.play-cardpick img {
+  display: block;
+  width: 100%;
+  height: 62px;
+  object-fit: cover;
+}
+
+/* Fingering table (teacher zone). */
+.play-fingering {
+  margin-top: 10px;
+}
+
+.play-finger-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.play-finger-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border: 1px solid var(--play-line);
+  border-radius: 10px;
+}
+
+.play-finger-row b {
+  min-width: 46px;
+  font-weight: 800;
+}
+
+.play-finger-input {
+  width: 64px;
+  padding: 4px 6px;
+  font: inherit;
+  text-align: center;
+  border: 1px solid var(--play-line);
+  border-radius: 8px;
+}
+
+/* Without the keyboard picture there is room for taller cards: the same rule,
+   with more height to share out between the rows. */
+.play-mission.no-keys .play-score {
+  --score-h: clamp(230px, calc(100vh - 390px), 64vh);
+  --score-cap: 34vh;
+}
+
+.play-mission.no-keys .play-score.few {
+  --score-cap: 44vh;
+}
+
+.play-mission.is-fullscreen.no-keys .play-score {
+  --score-h: clamp(260px, calc(100vh - 200px), 76vh);
+  --score-cap: 46vh;
+}
+
+.play-mission.is-fullscreen.no-keys .play-score.few {
+  --score-cap: 60vh;
+}
+
+/* Improvisa: the choices (mode, what the keyboard offers). */
+.play-improv-choice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.play-chip-big {
+  display: grid;
+  gap: 2px;
+  flex: 1 1 200px;
+  padding: 10px 14px;
+  text-align: left;
+  background: var(--play-panel);
+  border: 2px solid var(--play-line);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color 0.12s ease, transform 0.12s ease;
+}
+
+.play-chip-big strong {
+  font-size: 17px;
+}
+
+.play-chip-big small {
+  color: var(--play-dim, #6b6b70);
+}
+
+.play-chip-big.on {
+  border-color: var(--play-cyan);
+  box-shadow: 0 0 0 3px rgb(54 197 240 / 25%);
+}
+
+.play-chip-big:hover {
+  transform: translateY(-2px);
+}
+
+.play-song.on {
+  border-color: var(--play-cyan);
+  box-shadow: 0 0 0 3px rgb(54 197 240 / 25%);
+}
+
+/* One card for the whole wheel: the chords, in order, with the one playing lit. */
+.score-wheel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.score-wheel-chip {
+  padding: 3px 10px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #1d1d1f;
+  background: #e7e4dd;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  opacity: 0.45;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.score-wheel-chip.now {
+  opacity: 1;
+  border-color: var(--play-cyan);
+  transform: scale(1.08);
+}
+
+.play-mission.is-fullscreen .score-wheel-chip {
+  font-size: 18px;
+}

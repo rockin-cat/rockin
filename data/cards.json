@@ -1,0 +1,4370 @@
+{
+  "legend": {
+    "subdivisions_per_beat": "Rhythmic cards: number of slices in each beat (circle) of the card.",
+    "pattern": "Rhythmic cards: one array per beat, one entry per slice. 1 = attack, 2 = the previous sound keeps ringing (long-note bars), 0 = silence.",
+    "contour": "Melodic cards: relative pitch of each point in play order. 0 = lowest; equal numbers = the same note.",
+    "layout": "Where the drawing sits on the image, for the playhead: x values are fractions of the image width, y values fractions of its height, radius a fraction of the width. Melodic points are in play order; `stroke` numbers the connected line each belongs to."
+  },
+  "cards": {
+    "rhythm_binary_01.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 1,
+      "source": "DORS/dors mètrica binària 1.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_02.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 2,
+      "source": "DORS/dors mètrica binària 2.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_03.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 3,
+      "source": "DORS/dors mètrica binària 3.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.3003,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_04.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 4,
+      "source": "DORS/dors mètrica binària 4.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_05.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 5,
+      "source": "DORS/dors mètrica binària 5.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          2
+        ],
+        [
+          2
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.0712,
+            "x1": 0.244
+          },
+          {
+            "x0": 0.2989,
+            "x1": 0.4717
+          },
+          {
+            "x0": 0.5265,
+            "x1": 0.6993
+          },
+          {
+            "x0": 0.7541,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_06.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 6,
+      "source": "DORS/dors mètrica binària 6.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.3003,
+            "x1": 0.4725
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6997
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_07.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 7,
+      "source": "DORS/dors mètrica binària 7.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5013,
+        "radius": 0.0861,
+        "cells": [
+          {
+            "x0": 0.0757,
+            "x1": 0.2471
+          },
+          {
+            "x0": 0.3021,
+            "x1": 0.4743
+          },
+          {
+            "x0": 0.5302,
+            "x1": 0.7015
+          },
+          {
+            "x0": 0.7583,
+            "x1": 0.9297
+          }
+        ]
+      }
+    },
+    "rhythm_binary_08.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 8,
+      "source": "DORS/dors mètrica binària 8.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_09.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 9,
+      "source": "DORS/dors mètrica binària 9.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.0739,
+            "x1": 0.2462
+          },
+          {
+            "x0": 0.3021,
+            "x1": 0.4743
+          },
+          {
+            "x0": 0.5302,
+            "x1": 0.7015
+          },
+          {
+            "x0": 0.7583,
+            "x1": 0.9297
+          }
+        ]
+      }
+    },
+    "rhythm_binary_10.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 10,
+      "source": "DORS/dors mètrica binària 10.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.3003,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_11.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 11,
+      "source": "DORS/dors mètrica binària 11.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1,
+        2
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5013,
+        "radius": 0.0861,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.3003,
+            "x1": 0.4725
+          },
+          {
+            "x0": 0.5284,
+            "x1": 0.6997
+          },
+          {
+            "x0": 0.7565,
+            "x1": 0.9279
+          }
+        ]
+      }
+    },
+    "rhythm_binary_12.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 12,
+      "source": "DORS/dors mètrica binària 12.png",
+      "subdivisions_per_beat": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "pattern": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.2435
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_13.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 13,
+      "source": "DORS/dors mètrica binària 13.png",
+      "subdivisions_per_beat": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "pattern": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.2435
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_14.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 14,
+      "source": "DORS/dors mètrica binària 14.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        1,
+        2
+      ],
+      "pattern": [
+        [
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.2435
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_15.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 15,
+      "source": "DORS/dors mètrica binària 15.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5609,
+            "x1": 0.7322
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_16.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 16,
+      "source": "DORS/dors mètrica binària 16.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        2,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_17.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 17,
+      "source": "DORS/dors mètrica binària 17.png",
+      "subdivisions_per_beat": [
+        2,
+        1,
+        2,
+        2
+      ],
+      "pattern": [
+        [
+          1,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.2435
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_18.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 18,
+      "source": "DORS/dors mètrica binària 18.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        2,
+        2
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.2435
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_19.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 19,
+      "source": "DORS/dors mètrica binària 19.png",
+      "subdivisions_per_beat": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          0,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.0739,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_20.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 20,
+      "source": "DORS/dors mètrica binària 20.png",
+      "subdivisions_per_beat": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          0,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.0739,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_21.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 21,
+      "source": "DORS/dors mètrica binària 21.png",
+      "subdivisions_per_beat": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "pattern": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.3003,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_22.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 22,
+      "source": "DORS/dors mètrica binària 22.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.3003,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_23.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 23,
+      "source": "DORS/dors mètrica binària 23.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.3003,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_24.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 24,
+      "source": "DORS/dors mètrica binària 24.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        1,
+        2
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.3003,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_25.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 25,
+      "source": "DORS/dors mètrica binària 25.png",
+      "subdivisions_per_beat": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "pattern": [
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0875,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4725
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_26.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 26,
+      "source": "DORS/dors mètrica binària 26.png",
+      "subdivisions_per_beat": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "pattern": [
+        [
+          1,
+          2,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4725
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_27.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 27,
+      "source": "DORS/dors mètrica binària 27.png",
+      "subdivisions_per_beat": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "pattern": [
+        [
+          1,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          1,
+          2
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_28.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 28,
+      "source": "DORS/dors mètrica binària 28.png",
+      "subdivisions_per_beat": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "pattern": [
+        [
+          1,
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0875,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_29.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 29,
+      "source": "DORS/dors mètrica binària 29.png",
+      "subdivisions_per_beat": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "pattern": [
+        [
+          1,
+          2,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          2,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5006,
+        "radius": 0.0875,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_binary_30.png": {
+      "type": "rhythmic",
+      "meter": "binary",
+      "number": 30,
+      "source": "DORS/dors mètrica binària 30.png",
+      "subdivisions_per_beat": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "pattern": [
+        [
+          1,
+          1,
+          2,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          2
+        ],
+        [
+          1,
+          1,
+          2,
+          2
+        ]
+      ],
+      "layout": {
+        "y": 0.5006,
+        "radius": 0.0875,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_01.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 1,
+      "source": "DORS/dors mètrica ternària 1.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.0712,
+            "x1": 0.3066
+          },
+          {
+            "x0": 0.3814,
+            "x1": 0.6168
+          },
+          {
+            "x0": 0.6934,
+            "x1": 0.9288
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_02.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 2,
+      "source": "DORS/dors mètrica ternària 2.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5013,
+        "radius": 0.1177,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3093
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_03.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 3,
+      "source": "DORS/dors mètrica ternària 3.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3093
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_04.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 4,
+      "source": "DORS/dors mètrica ternària 4.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.3075
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_05.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 5,
+      "source": "DORS/dors mètrica ternària 5.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          0
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3093
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_06.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 6,
+      "source": "DORS/dors mètrica ternària 6.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          0
+        ],
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1136,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.2985
+          },
+          {
+            "x0": 0.3724,
+            "x1": 0.5987
+          },
+          {
+            "x0": 0.6718,
+            "x1": 0.8981
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_07.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 7,
+      "source": "DORS/dors mètrica ternària 7.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1136,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.2985
+          },
+          {
+            "x0": 0.3724,
+            "x1": 0.5987
+          },
+          {
+            "x0": 0.6718,
+            "x1": 0.8981
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_08.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 8,
+      "source": "DORS/dors mètrica ternària 8.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1136,
+        "cells": [
+          {
+            "x0": 0.0712,
+            "x1": 0.2982
+          },
+          {
+            "x0": 0.3712,
+            "x1": 0.5981
+          },
+          {
+            "x0": 0.6718,
+            "x1": 0.8981
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_09.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 9,
+      "source": "DORS/dors mètrica ternària 9.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1136,
+        "cells": [
+          {
+            "x0": 0.1019,
+            "x1": 0.3273
+          },
+          {
+            "x0": 0.4013,
+            "x1": 0.6276
+          },
+          {
+            "x0": 0.7006,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_10.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 10,
+      "source": "DORS/dors mètrica ternària 10.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          2
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1258,
+        "cells": [
+          {
+            "x0": 0.0712,
+            "x1": 0.3046
+          },
+          {
+            "x0": 0.3851,
+            "x1": 0.6185
+          },
+          {
+            "x0": 0.699,
+            "x1": 0.9324
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_11.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 11,
+      "source": "DORS/dors mètrica ternària 11.png",
+      "subdivisions_per_beat": [
+        2,
+        2,
+        2
+      ],
+      "pattern": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1172,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.3075
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_12.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 12,
+      "source": "DORS/dors mètrica ternària 12.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        2
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1136,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3003
+          },
+          {
+            "x0": 0.3715,
+            "x1": 0.5987
+          },
+          {
+            "x0": 0.6718,
+            "x1": 0.8981
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_13.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 13,
+      "source": "DORS/dors mètrica ternària 13.png",
+      "subdivisions_per_beat": [
+        2,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          0,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.3093
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_14.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 14,
+      "source": "DORS/dors mètrica ternària 14.png",
+      "subdivisions_per_beat": [
+        2,
+        2,
+        2
+      ],
+      "pattern": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.3075
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_15.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 15,
+      "source": "DORS/dors mètrica ternària 15.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        2
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.3075
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_16.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 16,
+      "source": "DORS/dors mètrica ternària 16.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        1
+      ],
+      "pattern": [
+        [
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.3075
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_17.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 17,
+      "source": "DORS/dors mètrica ternària 17.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.4981,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3093
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_18.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 18,
+      "source": "DORS/dors mètrica ternària 18.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        2
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1177,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3093
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_19.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 19,
+      "source": "DORS/dors mètrica ternària 19.png",
+      "subdivisions_per_beat": [
+        2,
+        1,
+        2
+      ],
+      "pattern": [
+        [
+          1,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.3075
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_20.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 20,
+      "source": "DORS/dors mètrica ternària 20.png",
+      "subdivisions_per_beat": [
+        2,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.3075
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_21.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 21,
+      "source": "DORS/dors mètrica ternària 21.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        2
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.3075
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_22.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 22,
+      "source": "DORS/dors mètrica ternària 22.png",
+      "subdivisions_per_beat": [
+        2,
+        2,
+        2
+      ],
+      "pattern": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.0721,
+            "x1": 0.3093
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_23.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 23,
+      "source": "DORS/dors mètrica ternària 23.png",
+      "subdivisions_per_beat": [
+        1,
+        2,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1181,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3093
+          },
+          {
+            "x0": 0.3841,
+            "x1": 0.6195
+          },
+          {
+            "x0": 0.6961,
+            "x1": 0.9315
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_24.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 24,
+      "source": "DORS/dors mètrica ternària 24.png",
+      "subdivisions_per_beat": [
+        2,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          0,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1127,
+        "cells": [
+          {
+            "x0": 0.1019,
+            "x1": 0.3273
+          },
+          {
+            "x0": 0.4013,
+            "x1": 0.6276
+          },
+          {
+            "x0": 0.7006,
+            "x1": 0.9261
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_25.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 25,
+      "source": "DORS/dors mètrica ternària 25.png",
+      "subdivisions_per_beat": [
+        2,
+        1,
+        2
+      ],
+      "pattern": [
+        [
+          0,
+          1
+        ],
+        [
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1127,
+        "cells": [
+          {
+            "x0": 0.1019,
+            "x1": 0.3273
+          },
+          {
+            "x0": 0.4013,
+            "x1": 0.6276
+          },
+          {
+            "x0": 0.7006,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_26.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 26,
+      "source": "DORS/dors mètrica ternària 26.png",
+      "subdivisions_per_beat": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "pattern": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_27.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 27,
+      "source": "DORS/dors mètrica ternària 27.png",
+      "subdivisions_per_beat": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "pattern": [
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_28.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 28,
+      "source": "DORS/dors mètrica ternària 28.png",
+      "subdivisions_per_beat": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "pattern": [
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.0857,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.2453
+          },
+          {
+            "x0": 0.2994,
+            "x1": 0.4716
+          },
+          {
+            "x0": 0.5275,
+            "x1": 0.6988
+          },
+          {
+            "x0": 0.7547,
+            "x1": 0.927
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_29.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 29,
+      "source": "DORS/dors mètrica ternària 29.png",
+      "subdivisions_per_beat": [
+        1,
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.509,
+        "radius": 0.1132,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3003
+          },
+          {
+            "x0": 0.3724,
+            "x1": 0.5987
+          },
+          {
+            "x0": 0.6727,
+            "x1": 0.8999
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_30.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 30,
+      "source": "DORS/dors mètrica ternària 30.png",
+      "subdivisions_per_beat": [
+        3,
+        3,
+        3
+      ],
+      "pattern": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.509,
+        "radius": 0.1132,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3003
+          },
+          {
+            "x0": 0.3724,
+            "x1": 0.5987
+          },
+          {
+            "x0": 0.6727,
+            "x1": 0.8999
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_31.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 31,
+      "source": "DORS/dors mètrica ternària 31.png",
+      "subdivisions_per_beat": [
+        3,
+        3,
+        3
+      ],
+      "pattern": [
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.509,
+        "radius": 0.1132,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3003
+          },
+          {
+            "x0": 0.3724,
+            "x1": 0.5996
+          },
+          {
+            "x0": 0.6727,
+            "x1": 0.8999
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_32.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 32,
+      "source": "DORS/dors mètrica ternària 32.png",
+      "subdivisions_per_beat": [
+        3,
+        3,
+        3
+      ],
+      "pattern": [
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "layout": {
+        "y": 0.509,
+        "radius": 0.1132,
+        "cells": [
+          {
+            "x0": 0.073,
+            "x1": 0.3003
+          },
+          {
+            "x0": 0.3724,
+            "x1": 0.5996
+          },
+          {
+            "x0": 0.6727,
+            "x1": 0.8999
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_33.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 33,
+      "source": "DORS/dors mètrica ternària 33.png",
+      "subdivisions_per_beat": [
+        1,
+        1
+      ],
+      "pattern": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1344,
+        "cells": [
+          {
+            "x0": 0.1001,
+            "x1": 0.3688
+          },
+          {
+            "x0": 0.5951,
+            "x1": 0.8638
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_34.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 34,
+      "source": "DORS/dors mètrica ternària 34.png",
+      "subdivisions_per_beat": [
+        3,
+        3
+      ],
+      "pattern": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1344,
+        "cells": [
+          {
+            "x0": 0.1001,
+            "x1": 0.3688
+          },
+          {
+            "x0": 0.5951,
+            "x1": 0.8638
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_35.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 35,
+      "source": "DORS/dors mètrica ternària 35.png",
+      "subdivisions_per_beat": [
+        3,
+        3
+      ],
+      "pattern": [
+        [
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1344,
+        "cells": [
+          {
+            "x0": 0.1001,
+            "x1": 0.3688
+          },
+          {
+            "x0": 0.5951,
+            "x1": 0.8638
+          }
+        ]
+      }
+    },
+    "rhythm_ternary_36.png": {
+      "type": "rhythmic",
+      "meter": "ternary",
+      "number": 36,
+      "source": "DORS/dors mètrica ternària 36.png",
+      "subdivisions_per_beat": [
+        3,
+        3
+      ],
+      "pattern": [
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "layout": {
+        "y": 0.5,
+        "radius": 0.1344,
+        "cells": [
+          {
+            "x0": 0.1001,
+            "x1": 0.3688
+          },
+          {
+            "x0": 0.5951,
+            "x1": 0.8638
+          }
+        ]
+      }
+    },
+    "melodic_01.png": {
+      "type": "melodic",
+      "number": 1,
+      "source": "DORS/dors patró melòdic 1.png",
+      "notes": 5,
+      "contour": [
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1554,
+            "y": 0.561,
+            "stroke": 0
+          },
+          {
+            "x": 0.3082,
+            "y": 0.4357,
+            "stroke": 0
+          },
+          {
+            "x": 0.5009,
+            "y": 0.5627,
+            "stroke": 0
+          },
+          {
+            "x": 0.6709,
+            "y": 0.4358,
+            "stroke": 0
+          },
+          {
+            "x": 0.8432,
+            "y": 0.5636,
+            "stroke": 0
+          }
+        ]
+      }
+    },
+    "melodic_02.png": {
+      "type": "melodic",
+      "number": 2,
+      "source": "DORS/dors patró melòdic 2.png",
+      "notes": 5,
+      "contour": [
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.156,
+            "y": 0.4358,
+            "stroke": 0
+          },
+          {
+            "x": 0.3279,
+            "y": 0.5636,
+            "stroke": 0
+          },
+          {
+            "x": 0.5,
+            "y": 0.4355,
+            "stroke": 0
+          },
+          {
+            "x": 0.6902,
+            "y": 0.5636,
+            "stroke": 0
+          },
+          {
+            "x": 0.8437,
+            "y": 0.4384,
+            "stroke": 0
+          }
+        ]
+      }
+    },
+    "melodic_03.png": {
+      "type": "melodic",
+      "number": 3,
+      "source": "DORS/dors patró melòdic 3.png",
+      "notes": 8,
+      "contour": [
+        1,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1554,
+            "y": 0.4361,
+            "stroke": 0
+          },
+          {
+            "x": 0.3152,
+            "y": 0.5632,
+            "stroke": 0
+          },
+          {
+            "x": 0.3485,
+            "y": 0.5602,
+            "stroke": 0
+          },
+          {
+            "x": 0.4834,
+            "y": 0.4365,
+            "stroke": 0
+          },
+          {
+            "x": 0.5164,
+            "y": 0.4361,
+            "stroke": 0
+          },
+          {
+            "x": 0.6764,
+            "y": 0.5633,
+            "stroke": 0
+          },
+          {
+            "x": 0.7094,
+            "y": 0.5628,
+            "stroke": 0
+          },
+          {
+            "x": 0.8445,
+            "y": 0.4388,
+            "stroke": 0
+          }
+        ]
+      }
+    },
+    "melodic_04.png": {
+      "type": "melodic",
+      "number": 4,
+      "source": "DORS/dors patró melòdic 4.png",
+      "notes": 8,
+      "contour": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1546,
+            "y": 0.5605,
+            "stroke": 0
+          },
+          {
+            "x": 0.2896,
+            "y": 0.4365,
+            "stroke": 0
+          },
+          {
+            "x": 0.3226,
+            "y": 0.4361,
+            "stroke": 0
+          },
+          {
+            "x": 0.4827,
+            "y": 0.5633,
+            "stroke": 0
+          },
+          {
+            "x": 0.5156,
+            "y": 0.5629,
+            "stroke": 0
+          },
+          {
+            "x": 0.6505,
+            "y": 0.4391,
+            "stroke": 0
+          },
+          {
+            "x": 0.6839,
+            "y": 0.4361,
+            "stroke": 0
+          },
+          {
+            "x": 0.8436,
+            "y": 0.5633,
+            "stroke": 0
+          }
+        ]
+      }
+    },
+    "melodic_05.png": {
+      "type": "melodic",
+      "number": 5,
+      "source": "DORS/dors patró melòdic 5.png",
+      "notes": 6,
+      "contour": [
+        2,
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1206,
+            "y": 0.365,
+            "stroke": 0
+          },
+          {
+            "x": 0.282,
+            "y": 0.365,
+            "stroke": 0
+          },
+          {
+            "x": 0.3217,
+            "y": 0.5032,
+            "stroke": 1
+          },
+          {
+            "x": 0.4794,
+            "y": 0.5032,
+            "stroke": 1
+          },
+          {
+            "x": 0.5514,
+            "y": 0.6344,
+            "stroke": 2
+          },
+          {
+            "x": 0.9094,
+            "y": 0.6344,
+            "stroke": 2
+          }
+        ]
+      }
+    },
+    "melodic_06.png": {
+      "type": "melodic",
+      "number": 6,
+      "source": "DORS/dors patró melòdic 6.png",
+      "notes": 6,
+      "contour": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1233,
+            "y": 0.6418,
+            "stroke": 0
+          },
+          {
+            "x": 0.4813,
+            "y": 0.6418,
+            "stroke": 0
+          },
+          {
+            "x": 0.5194,
+            "y": 0.5032,
+            "stroke": 1
+          },
+          {
+            "x": 0.6771,
+            "y": 0.5032,
+            "stroke": 1
+          },
+          {
+            "x": 0.7167,
+            "y": 0.3903,
+            "stroke": 2
+          },
+          {
+            "x": 0.8781,
+            "y": 0.3902,
+            "stroke": 2
+          }
+        ]
+      }
+    },
+    "melodic_07.png": {
+      "type": "melodic",
+      "number": 7,
+      "source": "DORS/dors patró melòdic 7.png",
+      "notes": 4,
+      "contour": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1554,
+            "y": 0.436,
+            "stroke": 0
+          },
+          {
+            "x": 0.3152,
+            "y": 0.5632,
+            "stroke": 0
+          },
+          {
+            "x": 0.5939,
+            "y": 0.436,
+            "stroke": 1
+          },
+          {
+            "x": 0.7538,
+            "y": 0.5632,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_08.png": {
+      "type": "melodic",
+      "number": 8,
+      "source": "DORS/dors patró melòdic 8.png",
+      "notes": 8,
+      "contour": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1178,
+            "y": 0.4312,
+            "stroke": 0
+          },
+          {
+            "x": 0.2776,
+            "y": 0.5585,
+            "stroke": 0
+          },
+          {
+            "x": 0.3079,
+            "y": 0.4289,
+            "stroke": 1
+          },
+          {
+            "x": 0.4677,
+            "y": 0.5561,
+            "stroke": 1
+          },
+          {
+            "x": 0.498,
+            "y": 0.4265,
+            "stroke": 2
+          },
+          {
+            "x": 0.6578,
+            "y": 0.5537,
+            "stroke": 2
+          },
+          {
+            "x": 0.6878,
+            "y": 0.4265,
+            "stroke": 3
+          },
+          {
+            "x": 0.8479,
+            "y": 0.5537,
+            "stroke": 3
+          }
+        ]
+      }
+    },
+    "melodic_09.png": {
+      "type": "melodic",
+      "number": 9,
+      "source": "DORS/dors patró melòdic 9.png",
+      "notes": 4,
+      "contour": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.2477,
+            "y": 0.5672,
+            "stroke": 0
+          },
+          {
+            "x": 0.4035,
+            "y": 0.4296,
+            "stroke": 0
+          },
+          {
+            "x": 0.5816,
+            "y": 0.5698,
+            "stroke": 0
+          },
+          {
+            "x": 0.7404,
+            "y": 0.4299,
+            "stroke": 0
+          }
+        ]
+      }
+    },
+    "melodic_10.png": {
+      "type": "melodic",
+      "number": 10,
+      "source": "DORS/dors patró melòdic 10.png",
+      "notes": 4,
+      "contour": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1619,
+            "y": 0.5669,
+            "stroke": 0
+          },
+          {
+            "x": 0.3172,
+            "y": 0.4293,
+            "stroke": 0
+          },
+          {
+            "x": 0.5159,
+            "y": 0.5668,
+            "stroke": 1
+          },
+          {
+            "x": 0.6748,
+            "y": 0.4271,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_11.png": {
+      "type": "melodic",
+      "number": 11,
+      "source": "DORS/dors patró melòdic 11.png",
+      "notes": 8,
+      "contour": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1172,
+            "y": 0.5673,
+            "stroke": 0
+          },
+          {
+            "x": 0.2726,
+            "y": 0.4298,
+            "stroke": 0
+          },
+          {
+            "x": 0.3013,
+            "y": 0.5651,
+            "stroke": 1
+          },
+          {
+            "x": 0.4601,
+            "y": 0.4253,
+            "stroke": 1
+          },
+          {
+            "x": 0.4891,
+            "y": 0.5718,
+            "stroke": 2
+          },
+          {
+            "x": 0.6479,
+            "y": 0.4322,
+            "stroke": 2
+          },
+          {
+            "x": 0.6768,
+            "y": 0.5741,
+            "stroke": 3
+          },
+          {
+            "x": 0.8356,
+            "y": 0.4343,
+            "stroke": 3
+          }
+        ]
+      }
+    },
+    "melodic_12.png": {
+      "type": "melodic",
+      "number": 12,
+      "source": "DORS/dors patró melòdic 12.png",
+      "notes": 8,
+      "contour": [
+        0,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1,
+        2
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1149,
+            "y": 0.6352,
+            "stroke": 0
+          },
+          {
+            "x": 0.344,
+            "y": 0.4054,
+            "stroke": 0
+          },
+          {
+            "x": 0.3713,
+            "y": 0.5467,
+            "stroke": 1
+          },
+          {
+            "x": 0.5234,
+            "y": 0.4072,
+            "stroke": 1
+          },
+          {
+            "x": 0.5514,
+            "y": 0.5535,
+            "stroke": 2
+          },
+          {
+            "x": 0.7035,
+            "y": 0.414,
+            "stroke": 2
+          },
+          {
+            "x": 0.7316,
+            "y": 0.5556,
+            "stroke": 3
+          },
+          {
+            "x": 0.8834,
+            "y": 0.4162,
+            "stroke": 3
+          }
+        ]
+      }
+    },
+    "melodic_13.png": {
+      "type": "melodic",
+      "number": 13,
+      "source": "DORS/dors patró melòdic 13.png",
+      "notes": 8,
+      "contour": [
+        2,
+        0,
+        2,
+        1,
+        2,
+        1,
+        2,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1844,
+            "y": 0.4016,
+            "stroke": 0
+          },
+          {
+            "x": 0.4213,
+            "y": 0.7285,
+            "stroke": 0
+          },
+          {
+            "x": 0.3741,
+            "y": 0.4003,
+            "stroke": 1
+          },
+          {
+            "x": 0.4984,
+            "y": 0.553,
+            "stroke": 1
+          },
+          {
+            "x": 0.555,
+            "y": 0.4067,
+            "stroke": 2
+          },
+          {
+            "x": 0.672,
+            "y": 0.5528,
+            "stroke": 2
+          },
+          {
+            "x": 0.7346,
+            "y": 0.4092,
+            "stroke": 3
+          },
+          {
+            "x": 0.841,
+            "y": 0.5526,
+            "stroke": 3
+          }
+        ]
+      }
+    },
+    "melodic_14.png": {
+      "type": "melodic",
+      "number": 14,
+      "source": "DORS/dors patró melòdic 14.png",
+      "notes": 8,
+      "contour": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1154,
+            "y": 0.7324,
+            "stroke": 0
+          },
+          {
+            "x": 0.2283,
+            "y": 0.5989,
+            "stroke": 0
+          },
+          {
+            "x": 0.3448,
+            "y": 0.4666,
+            "stroke": 0
+          },
+          {
+            "x": 0.4621,
+            "y": 0.3346,
+            "stroke": 0
+          },
+          {
+            "x": 0.5368,
+            "y": 0.7343,
+            "stroke": 1
+          },
+          {
+            "x": 0.6496,
+            "y": 0.6008,
+            "stroke": 1
+          },
+          {
+            "x": 0.766,
+            "y": 0.4684,
+            "stroke": 1
+          },
+          {
+            "x": 0.8834,
+            "y": 0.3365,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_15.png": {
+      "type": "melodic",
+      "number": 15,
+      "source": "DORS/dors patró melòdic 15.png",
+      "notes": 7,
+      "contour": [
+        0,
+        1,
+        2,
+        3,
+        1,
+        2,
+        3
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1155,
+            "y": 0.7324,
+            "stroke": 0
+          },
+          {
+            "x": 0.2283,
+            "y": 0.5989,
+            "stroke": 0
+          },
+          {
+            "x": 0.3448,
+            "y": 0.4666,
+            "stroke": 0
+          },
+          {
+            "x": 0.4621,
+            "y": 0.3346,
+            "stroke": 0
+          },
+          {
+            "x": 0.6487,
+            "y": 0.6004,
+            "stroke": 1
+          },
+          {
+            "x": 0.766,
+            "y": 0.4684,
+            "stroke": 1
+          },
+          {
+            "x": 0.8834,
+            "y": 0.3365,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_16.png": {
+      "type": "melodic",
+      "number": 16,
+      "source": "DORS/dors patró melòdic 16.png",
+      "notes": 6,
+      "contour": [
+        0,
+        1,
+        2,
+        3,
+        2,
+        3
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1154,
+            "y": 0.7324,
+            "stroke": 0
+          },
+          {
+            "x": 0.2283,
+            "y": 0.5989,
+            "stroke": 0
+          },
+          {
+            "x": 0.3448,
+            "y": 0.4666,
+            "stroke": 0
+          },
+          {
+            "x": 0.4621,
+            "y": 0.3346,
+            "stroke": 0
+          },
+          {
+            "x": 0.7669,
+            "y": 0.469,
+            "stroke": 1
+          },
+          {
+            "x": 0.8834,
+            "y": 0.3365,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_17.png": {
+      "type": "melodic",
+      "number": 17,
+      "source": "DORS/dors patró melòdic 17.png",
+      "notes": 8,
+      "contour": [
+        3,
+        2,
+        1,
+        0,
+        3,
+        2,
+        1,
+        0
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.141,
+            "y": 0.2983,
+            "stroke": 0
+          },
+          {
+            "x": 0.2481,
+            "y": 0.4508,
+            "stroke": 0
+          },
+          {
+            "x": 0.3558,
+            "y": 0.6042,
+            "stroke": 0
+          },
+          {
+            "x": 0.4647,
+            "y": 0.7639,
+            "stroke": 0
+          },
+          {
+            "x": 0.5348,
+            "y": 0.2967,
+            "stroke": 1
+          },
+          {
+            "x": 0.6429,
+            "y": 0.4459,
+            "stroke": 1
+          },
+          {
+            "x": 0.7486,
+            "y": 0.6041,
+            "stroke": 1
+          },
+          {
+            "x": 0.8582,
+            "y": 0.7624,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_18.png": {
+      "type": "melodic",
+      "number": 18,
+      "source": "DORS/dors patró melòdic 18.png",
+      "notes": 7,
+      "contour": [
+        3,
+        2,
+        1,
+        0,
+        3,
+        2,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.141,
+            "y": 0.2983,
+            "stroke": 0
+          },
+          {
+            "x": 0.2482,
+            "y": 0.4508,
+            "stroke": 0
+          },
+          {
+            "x": 0.3558,
+            "y": 0.6041,
+            "stroke": 0
+          },
+          {
+            "x": 0.4647,
+            "y": 0.7639,
+            "stroke": 0
+          },
+          {
+            "x": 0.5348,
+            "y": 0.2967,
+            "stroke": 1
+          },
+          {
+            "x": 0.6429,
+            "y": 0.4459,
+            "stroke": 1
+          },
+          {
+            "x": 0.7481,
+            "y": 0.6043,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_19.png": {
+      "type": "melodic",
+      "number": 19,
+      "source": "DORS/dors patró melòdic 19.png",
+      "notes": 6,
+      "contour": [
+        3,
+        2,
+        1,
+        0,
+        3,
+        2
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.141,
+            "y": 0.2983,
+            "stroke": 0
+          },
+          {
+            "x": 0.2481,
+            "y": 0.4508,
+            "stroke": 0
+          },
+          {
+            "x": 0.3558,
+            "y": 0.6042,
+            "stroke": 0
+          },
+          {
+            "x": 0.4647,
+            "y": 0.7639,
+            "stroke": 0
+          },
+          {
+            "x": 0.5348,
+            "y": 0.2967,
+            "stroke": 1
+          },
+          {
+            "x": 0.6432,
+            "y": 0.4459,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_20.png": {
+      "type": "melodic",
+      "number": 20,
+      "source": "DORS/dors patró melòdic 20.png",
+      "notes": 4,
+      "contour": [
+        0,
+        2,
+        1,
+        2
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1558,
+            "y": 0.6649,
+            "stroke": 0
+          },
+          {
+            "x": 0.3538,
+            "y": 0.3342,
+            "stroke": 0
+          },
+          {
+            "x": 0.5582,
+            "y": 0.5039,
+            "stroke": 0
+          },
+          {
+            "x": 0.7406,
+            "y": 0.3357,
+            "stroke": 0
+          }
+        ]
+      }
+    },
+    "melodic_21.png": {
+      "type": "melodic",
+      "number": 21,
+      "source": "DORS/dors patró melòdic 21.png",
+      "notes": 8,
+      "contour": [
+        0,
+        1,
+        2,
+        0,
+        1,
+        2,
+        0,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1352,
+            "y": 0.6407,
+            "stroke": 0
+          },
+          {
+            "x": 0.23,
+            "y": 0.4809,
+            "stroke": 0
+          },
+          {
+            "x": 0.3312,
+            "y": 0.3111,
+            "stroke": 0
+          },
+          {
+            "x": 0.4389,
+            "y": 0.6475,
+            "stroke": 1
+          },
+          {
+            "x": 0.5336,
+            "y": 0.4877,
+            "stroke": 1
+          },
+          {
+            "x": 0.635,
+            "y": 0.318,
+            "stroke": 1
+          },
+          {
+            "x": 0.7429,
+            "y": 0.6489,
+            "stroke": 2
+          },
+          {
+            "x": 0.838,
+            "y": 0.4888,
+            "stroke": 2
+          }
+        ]
+      }
+    },
+    "melodic_22.png": {
+      "type": "melodic",
+      "number": 22,
+      "source": "DORS/dors patró melòdic 22.png",
+      "notes": 8,
+      "contour": [
+        2,
+        1,
+        0,
+        2,
+        1,
+        0,
+        2,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1681,
+            "y": 0.3232,
+            "stroke": 0
+          },
+          {
+            "x": 0.2841,
+            "y": 0.4957,
+            "stroke": 0
+          },
+          {
+            "x": 0.4068,
+            "y": 0.6796,
+            "stroke": 0
+          },
+          {
+            "x": 0.4427,
+            "y": 0.3215,
+            "stroke": 1
+          },
+          {
+            "x": 0.5586,
+            "y": 0.4941,
+            "stroke": 1
+          },
+          {
+            "x": 0.6813,
+            "y": 0.6778,
+            "stroke": 1
+          },
+          {
+            "x": 0.7142,
+            "y": 0.3199,
+            "stroke": 2
+          },
+          {
+            "x": 0.8309,
+            "y": 0.4941,
+            "stroke": 2
+          }
+        ]
+      }
+    },
+    "melodic_23.png": {
+      "type": "melodic",
+      "number": 23,
+      "source": "DORS/dors patró melòdic 23.png",
+      "notes": 4,
+      "contour": [
+        0,
+        2,
+        2,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1087,
+            "y": 0.6461,
+            "stroke": 0
+          },
+          {
+            "x": 0.3073,
+            "y": 0.3163,
+            "stroke": 0
+          },
+          {
+            "x": 0.6903,
+            "y": 0.3175,
+            "stroke": 1
+          },
+          {
+            "x": 0.8501,
+            "y": 0.4878,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_24.png": {
+      "type": "melodic",
+      "number": 24,
+      "source": "DORS/dors patró melòdic 24.png",
+      "notes": 4,
+      "contour": [
+        2,
+        0,
+        1,
+        0
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1913,
+            "y": 0.3549,
+            "stroke": 0
+          },
+          {
+            "x": 0.3726,
+            "y": 0.6435,
+            "stroke": 0
+          },
+          {
+            "x": 0.5617,
+            "y": 0.5004,
+            "stroke": 0
+          },
+          {
+            "x": 0.7399,
+            "y": 0.6423,
+            "stroke": 0
+          }
+        ]
+      }
+    },
+    "melodic_25.png": {
+      "type": "melodic",
+      "number": 25,
+      "source": "DORS/dors patró melòdic 25.png",
+      "notes": 4,
+      "contour": [
+        2,
+        0,
+        0,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1526,
+            "y": 0.3546,
+            "stroke": 0
+          },
+          {
+            "x": 0.3391,
+            "y": 0.642,
+            "stroke": 0
+          },
+          {
+            "x": 0.702,
+            "y": 0.6456,
+            "stroke": 1
+          },
+          {
+            "x": 0.8436,
+            "y": 0.5117,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_26.png": {
+      "type": "melodic",
+      "number": 26,
+      "source": "DORS/dors patró melòdic 26.png",
+      "notes": 4,
+      "contour": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1211,
+            "y": 0.5897,
+            "stroke": 0
+          },
+          {
+            "x": 0.628,
+            "y": 0.5896,
+            "stroke": 0
+          },
+          {
+            "x": 0.6676,
+            "y": 0.4246,
+            "stroke": 1
+          },
+          {
+            "x": 0.8785,
+            "y": 0.4246,
+            "stroke": 1
+          }
+        ]
+      }
+    },
+    "melodic_27.png": {
+      "type": "melodic",
+      "number": 27,
+      "source": "DORS/dors patró melòdic 27.png",
+      "notes": 4,
+      "contour": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "layout": {
+        "points": [
+          {
+            "x": 0.1212,
+            "y": 0.4201,
+            "stroke": 0
+          },
+          {
+            "x": 0.6279,
+            "y": 0.4201,
+            "stroke": 0
+          },
+          {
+            "x": 0.6676,
+            "y": 0.5793,
+            "stroke": 1
+          },
+          {
+            "x": 0.8785,
+            "y": 0.5793,
+            "stroke": 1
+          }
+        ]
+      }
+    }
+  }
+}
