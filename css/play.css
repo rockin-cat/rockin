@@ -3150,3 +3150,49 @@ button.play-hands-chip b {
 .play-mission.is-fullscreen .play-level-pill small {
   display: none;
 }
+
+/* Improvisa: your own wheel. */
+.play-improv-custom {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border: 1px dashed var(--play-line);
+  border-radius: 14px;
+}
+
+.play-improv-custom h3 {
+  margin: 0;
+}
+
+.play-improv-custom input[type="text"] {
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 17px;
+  border: 1px solid var(--play-line);
+  border-radius: 10px;
+}
+
+.play-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.play-chip-add {
+  padding: 4px 10px;
+  font: inherit;
+  font-weight: 700;
+  color: inherit;
+  background: var(--play-panel);
+  border: 1px solid var(--play-line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.play-improv-custom-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}

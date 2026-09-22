@@ -4608,8 +4608,104 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
   })();
   const saveImprov = () => storage.set(IMPROV_KEY, JSON.stringify(improvCfg));
 
+  /** A wheel written by hand ("C Am F G", "Do Lam Fa Sol", "C | G | Am | F"). */
+  function readWheel(text) {
+    const SOLF = { do: 'C', re: 'D', mi: 'E', fa: 'F', sol: 'G', la: 'A', si: 'B' };
+    const joined = text.replace(/\b(do|re|mi|fa|sol|la|si)([#b♯♭]?)\s+m\b/gi, '$1$2m');
+    const tokens = joined.split(/[\s,|–-]+/).map((t) => t.trim()).filter(Boolean);
+    return tokens.map((token) => {
+      const cat = /^(do|re|mi|fa|sol|la|si)([#b♯♭]?)(.*)$/i.exec(token);
+      const symbol = cat ? `${SOLF[cat[1].toLowerCase()]}${cat[2].replace('♯', '#').replace('♭', 'b')}${cat[3]}` : token;
+      parseChord(symbol); // throws with a message in Catalan when it can't be read
+      return symbol;
+    });
+  }
+
+  /** "Inventa la teva roda": the student's own wheel for improvising. */
+  function customWheelBox() {
+    const current = improvCfg.custom?.wheel ?? [];
+    const input = el('input', { type: 'text', value: current.map(chordName).join(' '), placeholder: 'p. ex. Do La m Fa Sol', spellcheck: false });
+    const preview = el('div', { className: 'play-goal-chords' });
+    const error = el('p', { className: 'play-note bad-text' });
+    const styleSelect = el('select', {}, STYLES.filter((x) => x.id !== 'metronome').map((x) => new Option(x.name, x.id)));
+    styleSelect.value = improvCfg.custom?.style ?? 'rock';
+    const tempoInput = el('input', { type: 'number', min: 50, max: 160, value: improvCfg.custom?.tempo ?? 90 });
+    const refresh = () => {
+      try {
+        const wheel = readWheel(input.value);
+        preview.replaceChildren(...wheel.map((c) => chordChip(c, keyOf({ progression: wheel.join('|') }))));
+        error.textContent = '';
+        return wheel;
+      } catch (e) {
+        preview.replaceChildren();
+        error.textContent = e.message;
+        return null;
+      }
+    };
+    input.addEventListener('input', refresh);
+    const palette = ['C', 'Dm', 'Em', 'F', 'G', 'Am', 'D', 'E', 'A', 'Bb', 'Bm', 'Gm'].map((c) => {
+      const b = el('button', { type: 'button', className: 'play-chip-add', textContent: `+ ${chordName(c)}` });
+      b.addEventListener('click', () => {
+        input.value = `${input.value.trim()} ${chordName(c)}`.trim();
+        refresh();
+      });
+      return b;
+    });
+    const save = button('✨ Improvisa sobre aquesta roda', () => {
+      const wheel = refresh();
+      if (!wheel || !wheel.length) {
+        error.textContent = error.textContent || 'Escriu almenys un acord.';
+        return;
+      }
+      improvCfg.custom = { wheel, style: styleSelect.value, tempo: Math.max(50, Math.min(160, Number(tempoInput.value) || 90)) };
+      improvCfg.song = 'custom';
+      saveImprov();
+      showMap();
+    });
+    refresh();
+    return el('div', { className: 'play-improv-custom' }, [
+      el('h3', { textContent: '✏️ Inventa la teva roda' }),
+      el('p', { className: 'play-note', textContent: 'Escriu els acords en l\'ordre que vulguis (Do, La m, Sib… o C, Am, Bb…) o afegeix-los amb els botons. Un compàs per acord.' }),
+      input,
+      el('div', { className: 'play-chip-row' }, [
+        ...palette,
+        (() => {
+          const b = el('button', { type: 'button', className: 'play-chip-add', textContent: '⌫' , title: 'Treu l\'últim acord' });
+          b.addEventListener('click', () => {
+            input.value = input.value.trim().split(/\s+/).slice(0, -1).join(' ');
+            refresh();
+          });
+          return b;
+        })(),
+      ]),
+      preview,
+      error,
+      el('div', { className: 'play-improv-custom-row' }, [
+        el('label', { className: 'play-field' }, [el('span', { textContent: 'Estil' }), styleSelect]),
+        el('label', { className: 'play-field' }, [el('span', { textContent: 'Tempo' }), tempoInput]),
+        save,
+      ]),
+    ]);
+  }
+
+  /** The wheels to improvise over: your own first, then ROCKIN and every song. */
+  function improvSongs() {
+    const own = improvCfg.custom?.wheel?.length ? [{
+      key: 'custom',
+      name: 'La teva roda',
+      sub: 'inventada a Improvisa',
+      wheel: improvCfg.custom.wheel,
+      chordKey: keyOf({ progression: improvCfg.custom.wheel.join('|') }),
+      style: improvCfg.custom.style ?? 'rock',
+      tempo: improvCfg.custom.tempo ?? null,
+      meter: '4/4',
+      own: true,
+    }] : [];
+    return [...own, ...jamSongs()];
+  }
+
   function showImprov() {
-    const songs = jamSongs();
+    const songs = improvSongs();
     const song = songs.find((s) => s.key === improvCfg.song) ?? songs[0];
     const chooser = (items, current, onPick) => el('div', { className: 'play-improv-choice' }, items.map((item) => {
       const b = el('button', {
@@ -4621,7 +4717,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
     }));
     const songCard = (s) => {
       const b = el('button', { type: 'button', className: `play-song${s.book ? ' book' : ''}${s.key === song.key ? ' on' : ''}` }, [
-        el('span', { className: 'play-song-icon', textContent: s.key === 'rockin' ? '🎸' : s.book ? '📖' : '♬' }),
+        el('span', { className: 'play-song-icon', textContent: s.own ? '✏️' : s.key === 'rockin' ? '🎸' : s.book ? '📖' : '♬' }),
         el('strong', { textContent: s.name }),
         s.sub ? el('small', { className: 'play-song-artist', textContent: s.sub }) : null,
         el('div', { className: 'play-goal-chords' }, s.wheel.map((c) => chordChip(c, s.chordKey))),
@@ -4667,6 +4763,8 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       ]),
       el('div', { className: 'play-world' }, [
         el('h3', { textContent: 'Sobre quina roda' }),
+        customWheelBox(),
+        el('p', { className: 'play-note', textContent: 'També pots triar la roda de ROCKIN, les cançons del llibre i els camins que hagis creat a Cançons (surten tots aquí sota).' }),
         el('div', { className: 'play-songs' }, songs.map(songCard)),
       ]),
       el('div', { className: 'play-map-foot' }, [
@@ -4691,8 +4789,16 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
     const wheel = song.wheel.length ? song.wheel : ['C'];
     const tempo = Math.max(60, Math.min(120, song.tempo ? Math.round(song.tempo * (speed.tempo / 76) * (meter.compound ? 0.8 : 1)) : speed.tempo));
     const mode = improvCfg.mode;
-    const challenge = mode === 'reptes' ? CHALLENGES[Math.floor(Math.random() * CHALLENGES.length)] : null;
-    const TURNS = 2; // "reptes": two turns of the wheel
+    // "Reptes": one prompt at a time, as long as you want. Nothing stops by
+    // itself; "Un altre repte" says how the last one went and brings a new one.
+    const newChallenge = (not) => {
+      const pool = CHALLENGES.filter((c) => c !== not);
+      return pool[Math.floor(Math.random() * pool.length)];
+    };
+    let challenge = mode === 'reptes' ? newChallenge(null) : null;
+    let challengeStats = emptyStats();
+    let challengeFrom = 0;
+    let challengeNote = '';
     const world = { id: 'improv', title: 'Improvisa', goal: song.name, progression: wheel.join(' | '), chords: [...new Set(wheel)], level: 2, meter: song.meter, style: song.style, missions: [] };
     path = { ...path, key };
     mission = { id: `improv:${song.key}`, type: 'band', title: 'Improvisa', world, index: -1, step: 0, study: true };
@@ -4739,7 +4845,9 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
     const backing = createBacking({ style: song.style ?? 'rock', chords: true, volume: -12, metronome: false });
     const transport = createTransport({ progression: chords, meter, tempo, countInBars: 1, backing });
     const pulses = meter.pulses;
-    const barsPerBlock = 2; // call and response
+    // Call and response: the question lasts half the wheel (at least two bars)
+    // and the answer the other half.
+    const barsPerBlock = Math.max(2, Math.ceil(wheel.length / 2));
 
     const finish = () => {
       if (stopped) return;
@@ -4749,7 +4857,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       setFocus('keys');
       view = { marks: new Map(), message: '' };
       const lines = readStats(stats);
-      const done = challenge?.check ? challenge.check(stats) : null;
+      const done = challenge?.check ? challenge.check(closeStats(challengeStats, Math.max(1, bars - challengeFrom))) : null;
       setPanel({
         kicker: 'Improvisa',
         title: challenge ? (done === false ? 'Gairebé!' : 'Fet!') : 'Molt bé!',
@@ -4770,7 +4878,19 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       step = { escape: () => { screen = 'improv'; showMap(); } };
     };
 
-    const buttons = () => [button('Prou', finish, 'ghost')];
+    const nextOne = () => {
+      if (!challenge) return;
+      const done = challenge.check ? challenge.check(closeStats(challengeStats, Math.max(1, bars - challengeFrom))) : null;
+      challengeNote = done === false ? 'L\'anterior encara no ha sortit del tot; ja hi tornaràs. ' : `✓ ${challenge.ok} `;
+      challenge = newChallenge(challenge);
+      challengeStats = emptyStats();
+      challengeFrom = bars;
+      own.phase = '';
+    };
+    const buttons = () => [
+      mode === 'reptes' ? button('🎲 Un altre repte', nextOne, 'ghost') : null,
+      button('Prou, ja he acabat', finish, 'ghost'),
+    ].filter(Boolean);
     const own = {
       transport,
       backing,
@@ -4783,7 +4903,9 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
           const p = transport.positionAt(timeStamp);
           if (p.countIn || p.bar < 0) return;
           if (mode === 'dialeg' && Math.floor(p.bar / barsPerBlock) % 2 === 0) return; // the piano is talking
-          countNote(stats, { note, f: p.barFraction, bar: p.bar, chordSymbol: wheel[mod(p.bar, wheel.length)], guide: improvCfg.guide, key, pulses });
+          const counted = { note, f: p.barFraction, bar: p.bar, chordSymbol: wheel[mod(p.bar, wheel.length)], guide: improvCfg.guide, key, pulses };
+          countNote(stats, counted);
+          if (challenge) countNote(challengeStats, counted);
         },
         noteOff: () => {},
         update: () => {},
@@ -4820,10 +4942,6 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
             else if (full.includes(pc)) marks.set(n, { fill: false, colour: SHAPE, text: '' });
           }
           view = { marks, message: '' };
-          if (mode === 'reptes' && bar >= wheel.length * TURNS) {
-            finish();
-            return;
-          }
         }
         if (listening && block !== phrase.from) {
           // A new call: the piano invents a short question over this chord.
@@ -4846,12 +4964,12 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
           const chordText = `Ara sona <b>${chordName(symbol)}</b>.`;
           if (mode === 'dialeg') {
             setStatus(listening
-              ? { kicker: 'Escolta', text: `${chordText} <b>Escolta la pregunta</b> i contesta als dos compassos següents.`, tone: 'listen', buttons: buttons() }
+              ? { kicker: 'Escolta', text: `${chordText} <b>Escolta la pregunta</b> i contesta als ${barsPerBlock} compassos següents.`, tone: 'listen', buttons: buttons() }
               : { kicker: 'Contesta', text: `${chordText} <b>Ara tu!</b> Contesta com vulguis: imita-ho o canvia-ho.`, tone: 'ready', buttons: buttons() });
           } else if (mode === 'reptes') {
-            setStatus({ kicker: 'Repte', text: `${challenge.text} ${chordText}`, buttons: buttons() });
+            setStatus({ kicker: 'Repte', text: `${challengeNote}<b>Repte:</b> ${challenge.text} ${chordText} <span class="play-muted">Quan vulguis, un altre repte o prou.</span>`, buttons: buttons() });
           } else {
-            setStatus({ kicker: 'Improvisa', text: `${chordText} Toca el que vulguis: el teclat et marca les notes que hi encaixen. <span class="play-muted">Espai: pausa · Prou: acaba</span>`, buttons: buttons() });
+            setStatus({ kicker: 'Improvisa', text: `${chordText} Toca el que vulguis: el teclat et marca les notes que hi encaixen. La banda no s'atura fins que tu diguis prou. <span class="play-muted">Espai: pausa</span>`, buttons: buttons() });
           }
         }
       },
@@ -4864,7 +4982,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
         kicker: 'Repte',
         title: 'Improvisa',
         text: challenge.text,
-        note: `Dues voltes de la roda (${song.name}). Comença amb la música.`,
+        note: `Sobre ${song.name}, tanta estona com vulguis: tu decideixes quan canviar de repte i quan acabar.`,
         buttons: buttons(),
       });
     }

@@ -272,10 +272,12 @@ const SECTIONS = [
       <p>Quarta porta de la portada. Aquí no hi ha cartes, ni estrelles, ni correccions: la banda toca una roda i qui juga hi inventa a sobre. Serveix per perdre la por a tocar sense partitura i per escoltar-se.</p>
       <h4>Tres maneres</h4>
       <ul>
-        <li><b>Roda oberta</b>: la banda no para; s'hi toca el que es vulgui fins que es prem <b>Prou</b>.</li>
-        <li><b>Pregunta i resposta</b>: dos compassos el piano fa una frase curta (sempre diferent, feta amb notes de l'acord i de l'escala) i dos compassos contesta qui juga. Es pot imitar o canviar.</li>
-        <li><b>Reptes curts</b>: una consigna cada vegada (només tres notes, una frase que pugi, deixa un compàs de silenci, entra a contratemps, acaba en nota de l'acord…) i dues voltes de la roda per fer-la.</li>
+        <li><b>Roda oberta</b>: la banda no para; s'hi toca el que es vulgui fins que es prem <b>Prou, ja he acabat</b>.</li>
+        <li><b>Pregunta i resposta</b>: durant mitja roda el piano fa una pregunta (una frase pentatònica, sempre diferent, que acaba en suspens) i l'altra mitja contesta qui juga. Es pot imitar o canviar.</li>
+        <li><b>Reptes</b>: una consigna cada vegada (només tres notes, una frase que pugi, deixa un compàs de silenci, entra a contratemps, acaba en nota de l'acord…). No s'acaba sol: <b>🎲 Un altre repte</b> diu com ha anat i en porta un de nou, i <b>Prou, ja he acabat</b> tanca amb el resum.</li>
       </ul>
+      <h4>La roda</h4>
+      <p><b>✏️ Inventa la teva roda</b>: s'hi escriuen els acords (Do, La m, Si♭… o C, Am, Bb…) o s'afegeixen amb els botons, amb l'estil i el tempo, i ja es pot improvisar a sobre. També hi surten la roda de ROCKIN, les cançons del llibre i els camins creats a Cançons.</p>
       <h4>Què marca el teclat</h4>
       <ul>
         <li><b>Notes de l'acord</b>: les tres notes del que sona ara.</li>

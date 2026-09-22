@@ -19,7 +19,7 @@ export const GUIDES = [
 
 export const MODES = [
   { id: 'lliure', label: 'Roda oberta', note: 'La banda no s\'atura i tu improvises per sobre.' },
-  { id: 'dialeg', label: 'Pregunta i resposta', note: 'Dos compassos el piano, dos compassos tu.' },
+  { id: 'dialeg', label: 'Pregunta i resposta', note: 'Mitja roda pregunta el piano i l\'altra mitja contestes tu.' },
   { id: 'reptes', label: 'Reptes curts', note: 'Una consigna cada vegada, amb la banda.' },
 ];
 
@@ -43,16 +43,10 @@ export function guideNotes(symbol, key, guide) {
  * never at home), so it sounds like a question and not like random notes.
  * Returns [{ at, note }] with `at` in pulses from the start of the block.
  */
-// Rhythms in pulses (2 bars of four): all start on the beat and leave room to answer.
-const CALL_RHYTHMS = [
-  [0, 1, 2],
-  [0, 1, 1.5, 2],
-  [0, 0.5, 1, 2],
-  [0, 1, 2, 3],
-  [0, 0.5, 1.5, 3],
-  [1, 2, 3],
-  [0, 2, 2.5, 3],
-];
+// Rhythm cells for one bar (in pulses) and for the last bar of the question,
+// which stops early and leaves the last note ringing: that is what asks.
+const BAR_CELLS = [[0, 1, 2], [0, 1, 1.5, 2], [0, 0.5, 1, 2], [0, 2, 2.5], [0, 1, 2, 3], [0.5, 1, 2], [0, 1.5, 2], [0, 1, 2, 2.5]];
+const END_CELLS = [[0], [0, 1], [0, 0.5, 1], [0, 1.5]];
 const pick = (list) => list[Math.floor(Math.random() * list.length)];
 
 export function callPhrase(symbol, key, { pulses = 4, bars = 2 } = {}) {
@@ -71,17 +65,26 @@ export function callPhrase(symbol, key, { pulses = 4, bars = 2 } = {}) {
     for (const n of ladder) if (pitchClass(n) === pc && Math.abs(n - around) < Math.abs(best - around)) best = n;
     return best;
   };
-  // Start on a note of the chord that is in the pentatonic, around the middle.
-  const starts = ladder.filter((n) => chord.triad.includes(pitchClass(n)) && n >= 64 && n <= 76);
-  let i = ladder.indexOf(starts.length ? pick(starts) : near(scale[0], 69));
-  const total = Math.max(2, Math.min(pulses * bars - 1, 8));
-  const rhythm = CALL_RHYTHMS.filter((r) => r.at(-1) < total).map((r) => r);
-  const beatsOf = pick(rhythm.length ? rhythm : [[0, 1, 2]]);
-  // A shape: mostly steps of the ladder, one small leap, and back for the ending.
-  const moves = pick([[1, 1, -1], [1, -1, 2], [2, -1, -1], [-1, 2, 1], [1, 2, -2], [-1, -1, 2]]);
+  // The question fills the whole block (half the wheel): a cell per bar, and a
+  // shorter one to finish, so it breathes before the answer.
+  const times = [];
+  for (let b = 0; b < bars; b++) {
+    const cell = b === bars - 1 ? pick(END_CELLS) : pick(BAR_CELLS);
+    for (const at of cell) if (at < pulses) times.push(b * pulses + at);
+  }
+  // Start on a note of the chord, around the middle, and draw an arch: up for
+  // most of the phrase, then down towards the note that asks.
+  const starts = ladder.filter((n) => chord.triad.includes(pitchClass(n)) && n >= 62 && n <= 72);
+  let i = ladder.indexOf(starts.length ? pick(starts) : near(scale[0], 67));
+  const peak = Math.max(1, Math.floor(times.length * 0.6));
   const out = [];
-  beatsOf.forEach((at, k) => {
-    if (k > 0) i = Math.max(0, Math.min(ladder.length - 1, i + (moves[(k - 1) % moves.length] ?? 1)));
+  times.forEach((at, k) => {
+    if (k > 0) {
+      const dir = k <= peak ? 1 : -1;
+      const size = Math.random() < 0.2 ? 2 : 1;
+      const turn = Math.random() < 0.12 ? -1 : 1; // a small turn now and then
+      i = Math.max(0, Math.min(ladder.length - 1, i + dir * size * turn));
+    }
     out.push({ at, note: ladder[i] });
   });
   // The last note asks: move it to the nearest second or fifth of the key.
