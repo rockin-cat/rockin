@@ -1921,6 +1921,16 @@ button.play-board-tab.on {
   border-color: var(--play-yellow);
 }
 
+/* The chord that comes now, announced before you play it. */
+.play-target.next {
+  border-color: var(--play-cyan);
+  animation: star-in 0.3s ease-out;
+}
+
+.play-target.next strong {
+  color: var(--play-cyan);
+}
+
 .play-panel.hold .play-note {
   font-weight: 700;
   color: var(--play-ink);
