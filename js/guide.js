@@ -59,7 +59,7 @@ const SECTIONS = [
       <p>El mapa mostra una salutació, les estrelles, un botó gran <b>▶ Juga</b> amb la missió següent i els mons: l'actual obert, els acabats amb ✓ i els següents tancats amb 🔒. <b>Una estrella</b> obre la missió següent.</p>
       <h4>Els sis mons</h4>
       <ol>
-        <li><b>Llegeix les cartes</b>: lliçó i cartes sobre una sola nota (Do).</li>
+        <li><b>Llegeix les cartes</b>: lliçó, <b>«El joc t'espera»</b> (la pilota s'atura a cada rodona fins que es toca el Do: sense rellotge, només llegir) i cartes sobre una sola nota amb la música.</li>
         <li><b>Aprèn la roda</b> (Do – Sol – La m – Fa): cada acord, cada canvi, la roda pas a pas, la roda amb música i l'objectiu de memòria.</li>
         <li><b>La roda amb ritme</b>: cartes diferents sobre la roda, l'objectiu (tres cartes seguides) i tocar amb la banda.</li>
         <li><b>Cançons i estructura</b>: progressions de cançons conegudes i estrofa + tornada.</li>
@@ -79,7 +79,7 @@ const SECTIONS = [
       <p>Sota les missions de cada món hi ha totes les seves <b>cartes</b>. Clicant-ne una s'obre una pràctica lliure d'aquella carta sola, amb les tecles pintades i sense guardar estrelles: serveix per treballar un contorn melòdic o un ritme concret tantes vegades com calgui.</p>
 
       <h4>Els suports visuals es retiren sols</h4>
-      <p>A mesura que puja el <b>nivell de banda</b>, el joc treu ajudes: a partir del nivell 3 (de memòria) la <b>imatge del teclat</b> desapareix a les missions que no pinten tecles, i les cartes es fan més grosses; a partir del nivell 4, quan tota una volta de la roda es toca amb <b>la mateixa carta</b>, se'n mostra <b>una de sola</b>: al costat hi ha la <b>roda sencera</b> amb els acords en ordre i el que sona encès, i l'etiqueta diu «una carta · acord 2 de 4», així es veu quant queda per tocar. Sempre es pot recuperar el teclat amb el botó <b>🎹</b> de la barra de dalt.</p>
+      <p>A mesura que puja el <b>nivell de banda</b>, el joc treu ajudes: al nivell 2 el teclat de la pantalla <b>es fa més petit</b>; a partir del nivell 3 (de memòria) la <b>imatge del teclat</b> desapareix a les missions que no pinten tecles, i les cartes es fan més grosses; a partir del nivell 4, quan tota una volta de la roda es toca amb <b>la mateixa carta</b>, se'n mostra <b>una de sola</b>: al costat hi ha la <b>roda sencera</b> amb els acords en ordre i el que sona encès, i l'etiqueta diu «una carta · acord 2 de 4», així es veu quant queda per tocar. Sempre es pot recuperar el teclat amb el botó <b>🎹</b> de la barra de dalt.</p>
 
       <h4>Pantalla completa</h4>
       <p>A Juga, el botó <b>⛶ Pantalla completa</b> (o la tecla <b>F</b>) deixa només la carta, el teclat i una línia de text; Espai i Esc continuen funcionant i el joc segueix avançant sol, així una sessió de classe va gairebé sense ratolí. Hi entra <b>tot el joc</b>, també el mapa i els menús, de manera que el ratolí continua funcionant si surts de la missió. Esc en surt.</p>
