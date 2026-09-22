@@ -72,6 +72,9 @@ const SECTIONS = [
       <h4>Cartes difícils: les mans alternades</h4>
       <p>Les cartes amb el pols partit en quatre només es fan servir <b>amb dues mans</b>: amb una sola mà són massa subdivisió i acaben tensant el braç. Aquestes cartes es dibuixen en <b>una sola fila</b> amb els colors intercalats: cada tros <b style="color:#3fb2f5">blau</b> el toca la dreta i cada tros <b style="color:#ff8a2a">taronja</b>, l'esquerra, una darrere l'altra dins del mateix temps (com el patró de merengue). Amb una sola mà, el camí intel·ligent s'atura a les cartes intermèdies.</p>
 
+      <h4>El nivell, sempre a la vista</h4>
+      <p>Durant les missions, a la barra de dalt hi ha <b>«El teu nivell»</b> (de 0 a 6) amb el nom del nivell. Clicant-lo s'obre l'escala sencera: què es podria fer amb el grup a cada nivell, quins ja estan fets i <b>què falta</b> per al següent. La prova de nivell també hi compta: si et fa començar més endavant, el nivell ja surt pujat.</p>
+
       <h4>🃏 Estudia una carta</h4>
       <p>Sota les missions de cada món hi ha totes les seves <b>cartes</b>. Clicant-ne una s'obre una pràctica lliure d'aquella carta sola, amb les tecles pintades i sense guardar estrelles: serveix per treballar un contorn melòdic o un ritme concret tantes vegades com calgui.</p>
 

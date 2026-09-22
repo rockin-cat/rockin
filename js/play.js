@@ -208,7 +208,15 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
   const pianoCanvas = el('canvas');
   const animCanvas = el('canvas', { className: 'piano-anim' });
   const piano = el('div', { className: 'piano play-piano' }, [el('div', { className: 'piano-canvas' }, [pianoCanvas, animCanvas])]);
-  missionScreen.append(el('div', { className: 'play-top' }, [backButton, hud, missionStars, fullButton]), panel, scoreBox, scoreLegend, piano);
+  // Always on screen while playing: which band level you are at, and what the
+  // next one asks for (click it to see the whole ladder).
+  const levelPill = el('button', { type: 'button', className: 'play-level-pill', title: 'El teu nivell per tocar amb els companys' });
+  const levelLadder = el('div', { className: 'play-level-ladder', hidden: true });
+  const levelBox = el('div', { className: 'play-level-box' }, [levelPill, levelLadder]);
+  levelPill.addEventListener('click', () => {
+    levelLadder.hidden = !levelLadder.hidden;
+  });
+  missionScreen.append(el('div', { className: 'play-top' }, [backButton, hud, levelBox, missionStars, fullButton]), panel, scoreBox, scoreLegend, piano);
   backButton.addEventListener('click', () => showMap());
 
   // Full screen: the card and the keyboard fill the screen, for playing in class
@@ -1609,6 +1617,8 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
     mapScreen.hidden = true;
     missionScreen.hidden = false;
     showKeyboard(true); // card missions may hide it again below
+    levelLadder.hidden = true;
+    refreshLevelPill();
     showScore(false);
     renderHud(worldIndex);
     updateStars();
@@ -1752,7 +1762,33 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
     if (!st || st.teacher || !(level > (st.band ?? 0))) return null;
     st.band = level;
     saveStore();
+    refreshLevelPill();
     return `<b>Nivell de banda ${level}: ${BAND_LEVELS[level].title}.</b> ${BAND_LEVELS[level].can}`;
+  }
+
+  /** The level pill in the mission bar and its ladder, kept up to date. */
+  function refreshLevelPill() {
+    const st = me();
+    levelBox.hidden = !st || st.teacher || section === 'improvisa';
+    if (levelBox.hidden) return;
+    const level = bandLevel();
+    const info = BAND_LEVELS[level];
+    levelPill.replaceChildren(
+      el('small', { textContent: 'El teu nivell' }),
+      el('strong', { textContent: `${level} de ${BAND_LEVELS.length - 1} · ${info.title}` }),
+      el('span', { className: 'play-band-dots' }, BAND_LEVELS.map((_, k) => el('i', { className: k <= level ? 'on' : '' }))),
+    );
+    levelLadder.replaceChildren(
+      el('strong', { textContent: 'Què podries fer amb el teu grup' }),
+      ...BAND_LEVELS.map((lv, k) => el('div', { className: `play-level-step${k < level ? ' done' : k === level ? ' now' : ''}` }, [
+        el('b', { textContent: k < level ? '✓' : k === level ? '●' : String(k) }),
+        el('div', {}, [
+          el('span', { className: 'play-level-title', textContent: `Nivell ${k} · ${lv.title}` }),
+          el('p', { innerHTML: lv.can }),
+        ]),
+      ])),
+      info.next ? el('p', { className: 'play-note', innerHTML: `<b>Et falta:</b> ${info.next}` }) : el('p', { className: 'play-note', textContent: 'Ja ets al nivell més alt!' }),
+    );
   }
 
   /** The card on the map: what you could already do playing with other people. */
@@ -3376,6 +3412,10 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       stopSession();
       const index = Math.max(0, indexOf(missionId));
       const st = me();
+      // Starting further on means the missions before are known: the band level
+      // shows it from the first minute.
+      const proved = Math.min(4, Math.max(0, ...ROCKIN_PATH.missions.slice(0, index).map(bandLevelOf)));
+      const bandLine = proved > 0 ? raiseBandLevel(proved) : null;
       if (st && !st.teacher) {
         st.start = { ...(st.start ?? {}), rockin: index };
         st.placed = true;
@@ -3394,7 +3434,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
           el('strong', { textContent: target.world.title }),
           el('span', { textContent: target.title }),
         ])],
-        text: `Has superat ${passed} de ${TESTS.length} proves. Els mons d'abans queden oberts per si vols repassar.`,
+        text: `Has superat ${passed} de ${TESTS.length} proves. Els mons d'abans queden oberts per si vols repassar.${bandLine ? `<br>${bandLine}` : ''}`,
         tone: 'good',
         buttons: [
           button('▶ Som-hi', () => {

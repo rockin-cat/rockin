@@ -3054,3 +3054,99 @@ button.play-hands-chip b {
 .play-mission.is-fullscreen .score-wheel-chip {
   font-size: 18px;
 }
+
+/* The band level, always in the mission bar. */
+.play-level-box {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.play-level-pill {
+  display: grid;
+  gap: 2px;
+  padding: 6px 12px;
+  text-align: left;
+  color: inherit;
+  background: var(--play-panel);
+  border: 1px solid var(--play-line);
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.play-level-pill small {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--play-muted);
+}
+
+.play-level-pill strong {
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.play-level-pill .play-band-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.play-level-ladder {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 30;
+  width: min(420px, 90vw);
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 14px 16px;
+  background: #1c1735;
+  border: 1px solid var(--play-line);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgb(0 0 0 / 55%);
+}
+
+.play-level-ladder p b {
+  font-size: inherit;
+  color: var(--play-yellow, #ffc012);
+}
+
+.play-level-step {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--play-line);
+  opacity: 0.55;
+}
+
+.play-level-step.done,
+.play-level-step.now {
+  opacity: 1;
+}
+
+.play-level-step b {
+  flex: 0 0 22px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.play-level-step.done b {
+  color: var(--play-green);
+}
+
+.play-level-step.now b {
+  color: var(--play-cyan);
+}
+
+.play-level-step p {
+  margin: 2px 0 0;
+  font-size: 13px;
+}
+
+.play-level-title {
+  font-weight: 800;
+}
+
+.play-mission.is-fullscreen .play-level-pill small {
+  display: none;
+}
