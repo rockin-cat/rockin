@@ -59,7 +59,7 @@ const SECTIONS = [
       <p>El mapa mostra una salutació, les estrelles, un botó gran <b>▶ Juga</b> amb la missió següent i els mons: l'actual obert, els acabats amb ✓ i els següents tancats amb 🔒. <b>Una estrella</b> obre la missió següent.</p>
       <h4>Els sis mons</h4>
       <ol>
-        <li><b>Llegeix les cartes</b>: lliçó, <b>«El joc t'espera»</b> (la pilota s'atura a cada rodona fins que es toca el Do: sense rellotge, només llegir) i cartes sobre una sola nota amb la música.</li>
+        <li><b>Llegeix les cartes</b>: lliçó i cartes sobre una sola nota amb la música.</li>
         <li><b>Aprèn la roda</b> (Do – Sol – La m – Fa): cada acord, cada canvi, la roda pas a pas, la roda amb música i l'objectiu de memòria.</li>
         <li><b>La roda amb ritme</b>: cartes diferents sobre la roda, l'objectiu (tres cartes seguides) i tocar amb la banda.</li>
         <li><b>Cançons i estructura</b>: progressions de cançons conegudes i estrofa + tornada.</li>

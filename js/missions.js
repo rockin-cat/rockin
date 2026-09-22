@@ -111,7 +111,6 @@ export const WORLDS = [
           },
         ],
       },
-      { id: 'ritme-0', type: 'wait', title: 'El joc t\'espera', cards: [card(1), card(2), card(6)] },
       { id: 'ritme-1', type: 'pattern', title: 'Quatre temps', card: card(1), help: 'shape' },
       { id: 'ritme-2', type: 'pattern', title: 'Un silenci', card: card(2), help: 'shape' },
       { id: 'ritme-3', type: 'pattern', title: 'Una nota llarga', card: card(6), help: 'none' },

@@ -46,7 +46,7 @@ const SHAPE_NEXT = '#ffb37a';
 const SHARED = '#7ee2a8';
 const COUNT = '#b9e6ff';
 const SPLIT = 60; // two hands: notes below middle C are the left hand
-const GLYPH = { arpeggio: '⤴', 'probe-chords': '🧱', 'probe-changes': '⇄', find: '🔍', jump: '↷', build: '🧱', rush: '⏱', lesson: '?', chord: '♫', change: '⇄', steps: '⋯', wait: '⏸', pattern: '♩', mix: '★', song: '♬', structure: '§', band: '♪♪', invert: '↻' };
+const GLYPH = { arpeggio: '⤴', 'probe-chords': '🧱', 'probe-changes': '⇄', find: '🔍', jump: '↷', build: '🧱', rush: '⏱', lesson: '?', chord: '♫', change: '⇄', steps: '⋯', pattern: '♩', mix: '★', song: '♬', structure: '§', band: '♪♪', invert: '↻' };
 const TYPE_LABEL = {
   find: 'Troba la nota',
   jump: 'Salta tecles',
@@ -60,7 +60,6 @@ const TYPE_LABEL = {
   chord: 'Acord nou',
   change: 'Canvi',
   steps: 'Pas a pas',
-  wait: 'El joc t\'espera',
   pattern: 'Ritme',
   mix: 'Objectiu',
   song: 'Cançó',
@@ -176,6 +175,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
   let fingerMap = readFingerMap(); // chord symbol -> [f1, f2, f3], low to high (right hand)
   const tempoDrop = new Map(); // mission id -> bpm less than normal, after hard tries
   const helpBoost = new Map(); // mission id -> the keys light up again, after a missed try
+  const badTries = new Map(); // mission id -> tries in a row that went badly (the demo comes back)
   let pathId = storage.get('rockin.play.path') ?? null; // song path chosen in "Cançons"
   let section = 'juga'; // juga | cancons | banda
   const homeScreen = () => (section === 'cancons' ? 'songs' : section === 'banda' ? 'jam' : section === 'improvisa' ? 'improv' : 'map');
@@ -743,12 +743,9 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
 
   /** Where the placement test put the student in this path (missions before it are open). */
   const startIndex = () => ((path.base ?? path) === ROCKIN_PATH ? me()?.start?.rockin ?? 0 : 0);
-  // A "the game waits for you" mission is a first taste: it never locks the next one.
   const unlocked = (index) => {
     if (path === WORKSHOP_PATH || store.unlockAll || isTeacher() || index <= startIndex()) return true;
-    const prev = path.missions[index - 1];
-    if (starsOf(prev.id) >= 1) return true;
-    return prev.type === 'wait' && (index < 2 || starsOf(path.missions[index - 2].id) >= 1);
+    return starsOf(path.missions[index - 1].id) >= 1;
   };
   const nextIndex = () => {
     const from = startIndex();
@@ -1683,7 +1680,6 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       change: changeMission,
       steps: stepsMission,
       invert: invertMission,
-      wait: waitMission,
       pattern: cardsMission,
       mix: cardsMission,
       song: cardsMission,
@@ -2514,159 +2510,6 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       });
     };
     look();
-  }
-
-  // ---- "El joc t'espera": reading a card with no clock -----------------------------------------------
-  // The very first step: the ball stops on each circle and waits until the note
-  // is played. A white circle (silence) goes by on its own; a bar is held while
-  // the ball slides along it. Nothing is judged in time: it is only reading.
-
-  function waitMission() {
-    const world = mission.world;
-    const symbol = splitProgression(world.progression)[0] ?? 'C';
-    const root = parseChord(symbol).root;
-    const rootName = SOLFEGE[root];
-    const cards = (mission.cards ?? [mission.card]).map(cardByName).filter(Boolean);
-    const bars = cards.map((card) => ({ card, name: rootName, kind: 'play', tag: '' }));
-    showScore(true, true);
-    score.setBars(bars, { rows: [{ bars: bars.map((_, k) => k) }], columns: Math.min(4, bars.length), meterPulses: 4 });
-    // Every beat of every card, in order: play, rest or hold.
-    const steps = [];
-    cards.forEach((card, b) => {
-      const beats = card.pattern.length;
-      card.pattern.forEach((slices, beat) => {
-        const v = slices[0];
-        steps.push({ bar: b, f: beat / beats, kind: v === 1 ? 'play' : v === 2 ? 'hold' : 'rest' });
-      });
-    });
-    const marks = new Map();
-    const hits = new Map();
-    const addMark = (b, mark) => {
-      if (!marks.has(b)) marks.set(b, []);
-      marks.get(b).push(mark);
-      score.touch(b);
-    };
-    let i = 0;
-    let mistakes = 0;
-    let moving = null; // { from, to, t0 } while the ball slides to the next circle
-    let timer = null;
-    let finished = false;
-    let holding = null; // the note kept down through a bar
-    const started = performance.now();
-    const where = (k) => (k >= steps.length ? { bar: steps.at(-1).bar, f: 1 } : steps[k]);
-    scoreState = {
-      ball: () => {
-        if (finished) return null;
-        const now = performance.now();
-        if (moving) {
-          const s = Math.min(1, (now - moving.t0) / moving.ms);
-          const a = where(moving.from);
-          const b2 = where(moving.to);
-          if (a.bar !== b2.bar) return s < 1 ? { bar: a.bar, f: a.f + (1 - a.f) * s } : { bar: b2.bar, f: b2.f };
-          return { bar: a.bar, f: a.f + (b2.f - a.f) * easeInOut(s) };
-        }
-        const here = where(i);
-        return { bar: here.bar, f: here.f, inPlace: steps[i]?.kind === 'play' ? ((now - started) / 1100) % 1 : undefined };
-      },
-      data: (b) => {
-        const card = cards[b];
-        const total = card.pattern.flat().filter((v) => v === 1).length;
-        const got = hits.get(b) ?? 0;
-        return { onsets: Array.from({ length: total }, (_, k) => (k < got ? 'hit' : 'pending')), marks: marks.get(b) ?? [] };
-      },
-    };
-    const advance = (ms = 380) => {
-      clearTimeout(timer);
-      const from = i;
-      i++;
-      moving = { from, to: i, t0: performance.now(), ms };
-      timer = setTimeout(() => {
-        moving = null;
-        if (i >= steps.length) return done();
-        if (steps[i].bar !== steps[from].bar) score.setCurrent(steps[i].bar);
-        prompt();
-      }, ms);
-    };
-    const done = () => {
-      finished = true;
-      view = { marks: new Map(), message: '' };
-      finishMission(mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1, {
-        title: 'Has llegit les cartes!',
-        text: mistakes ? `${mistakes} ${mistakes === 1 ? 'errada' : 'errades'}. Ara ja pots provar-ho amb la música.` : 'Cap errada. Ara, amb la música i el pols!',
-        retry: () => again(),
-      });
-    };
-    const keysOf = () => new Map(keysOfPc(root).filter((n) => n >= 48 && n <= 84).map((n) => [n, { fill: true, colour: SHAPE, text: '' }]));
-    const prompt = (message = '', tone = '') => {
-      const step = steps[i];
-      if (!step) return;
-      const card = cards[step.bar];
-      const beat = Math.round(step.f * card.pattern.length) + 1;
-      view = { marks: step.kind === 'rest' ? new Map() : keysOf(), message: '' };
-      const text = step.kind === 'play'
-        ? `Rodona <b>blava</b>: toca el <b>${rootName}</b>. El joc t'espera.`
-        : step.kind === 'hold'
-          ? `La <b>barra</b> continua: <b>mantén</b> la tecla premuda.`
-          : `Rodona <b>blanca</b>: silenci. <b>No toquis</b>, la pilota passa sola.`;
-      setPanel({
-        kicker: `El joc t'espera · carta ${step.bar + 1} de ${cards.length}`,
-        title: `Temps ${beat}`,
-        text,
-        dots: steps.map((_, k) => el('span', { className: k < i ? 'on' : k === i ? 'now' : '' })),
-        note: message,
-        tone,
-        buttons: [button('♪ Escolta el ' + rootName, () => playNotes([60 + ((root + 12 - 0) % 12)]), 'ghost')],
-      });
-      clearTimeout(timer);
-      if (step.kind === 'rest') timer = setTimeout(() => advance(420), 1100);
-      if (step.kind === 'hold') {
-        // Held: the ball slides along the bar. Let go (or never played): it moves on anyway.
-        const kept = holding !== null && getHeld().has(holding);
-        timer = setTimeout(() => advance(kept ? 600 : 420), kept ? 700 : 900);
-      }
-    };
-    step = {
-      noteOn: ({ note }) => {
-        if (finished || moving) return;
-        const s0 = steps[i];
-        if (!s0) return;
-        if (s0.kind === 'rest') {
-          mistakes++;
-          feedback.set(note, 'bad');
-          addMark(s0.bar, { f: s0.f + 0.02, kind: 'rest', label: 'silenci' });
-          return prompt('Aquí és <b>silenci</b>: deixa-la passar sense tocar.', 'bad');
-        }
-        if (s0.kind === 'hold') return;
-        if (pitchClass(note) !== root) {
-          mistakes++;
-          feedback.set(note, 'bad');
-          addMark(s0.bar, { f: s0.f + 0.02, kind: 'wrong', label: SOLFEGE[pitchClass(note)] });
-          return prompt(`Això és <b>${SOLFEGE[pitchClass(note)]}</b>. Busca el <b>${rootName}</b> (les tecles grogues).`, 'bad');
-        }
-        feedback.set(note, 'good');
-        hits.set(s0.bar, (hits.get(s0.bar) ?? 0) + 1);
-        addMark(s0.bar, { f: s0.f, kind: 'hit' });
-        holding = note;
-        advance();
-      },
-      noteOff: ({ note }) => {
-        feedback.delete(note);
-        if (finished) return;
-        const s0 = steps[i];
-        if (note === holding && s0?.kind === 'hold' && !moving) {
-          mistakes++;
-          addMark(s0.bar, { f: s0.f, kind: 'short', label: 'mantén!' });
-          holding = null;
-          prompt('Era una <b>nota llarga</b>: s\'ha de mantenir fins al final de la barra.', 'bad');
-          return;
-        }
-        if (note === holding && s0?.kind !== 'hold') holding = null;
-      },
-      space: () => {},
-    };
-    setFocus('both');
-    score.setCurrent(0);
-    prompt();
   }
 
   // ---- Inversions of a chord ---------------------------------------------------------------------------------------
@@ -3742,7 +3585,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
 
     const test1 = () => intro(0, 'Toca el <b>Do</b> seguint la carta, amb la música. Primer l\'escoltes una vegada.', rhythmRows);
 
-    const test2 = () => intro(1, 'Construeix quatre acords <b>sense ajuda</b>: Do, Sol, La m i Fa. Les tres notes alhora, <b>en l\'ordre que vulguis</b>: si ja els inverteixes, també val. <b>Aixeca els dits entre acord i acord</b>: les tecles que et quedin premudes de l\'anterior no compten ni com a error ni com a acord.', () => {
+    const test2 = () => intro(1, 'Construeix quatre acords <b>sense ajuda</b>: Do, Sol, La m i Fa. Van un darrere l\'altre, i <b>abans de cada un el joc s\'atura i et diu quin toca ara</b>. Les tres notes alhora, <b>en l\'ordre que vulguis</b>: si ja els inverteixes, també val.', () => {
       const list = ['C', 'G', 'Am', 'F'];
       let k = 0;
       let good = 0;
@@ -3998,7 +3841,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
         view = { marks: new Map(notes.map((n) => [n, { fill: true, colour: SHAPE, text: '' }])), message: '' };
         gamePanel({
           ...h,
-          ask: guided ? 'Ara les tres alhora!' : `Construeix l'acord`,
+          ask: guided ? 'Ara les tres alhora!' : `Construeix aquest acord${h.total ? ` · ${(h.done ?? 0) + 1} de ${h.total}` : ''}`,
           target: chordName(symbol),
           sub: guided ? names3.join(' + ') : quality,
           message,
@@ -4049,7 +3892,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       gamePanel({ ...header(), ask: inverted ? 'Aquest és, i en inversió!' : 'Aquest és', target: chordName(symbol), sub: inverted ? `${names3.join(' – ')} · les mateixes notes en un altre ordre` : names3.join(' – '), tone: 'good' });
       setTimeout(() => onDone(mistakes), 900);
     };
-    step = {
+    const playStep = {
       noteOn: ({ note }) => {
         if (finished) return;
         if (stage === 'root') {
@@ -4078,7 +3921,43 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
         if (wasStale && !finished) render();
       },
     };
-    render();
+    // Before playing anything: which chord comes now, on its own screen. The
+    // chords follow one another and the name alone changing is too easy to
+    // miss, so the game stops, says it, and waits.
+    const h0 = header();
+    const countdown = el('p', { className: 'play-note' });
+    const begin = () => {
+      cancelAutoNext();
+      step = playStep;
+      render();
+    };
+    view = { marks: new Map(), message: '' };
+    setPanel({
+      kicker: `${TYPE_LABEL[mission.type] ?? ''} · ${mission.title}`,
+      big: [el('div', { className: 'play-target next' }, [
+        el('small', { textContent: h0.total ? `Acord ${(h0.done ?? 0) + 1} de ${h0.total} · ara et toca` : 'Ara et toca' }),
+        el('strong', { textContent: chordName(symbol) }),
+        el('span', { textContent: quality }),
+      ])],
+      dots: h0.total ? Array.from({ length: h0.total }, (_, j) => el('span', { className: j < (h0.done ?? 0) ? 'on' : j === (h0.done ?? 0) ? 'now' : '' })) : null,
+      note: stale.size ? lift() : 'Quan vulguis, construeix-lo. Encara no compta res.',
+      tone: 'hold',
+      extra: countdown,
+      buttons: [button('Som-hi ▶', begin)],
+    });
+    // Playing already starts the chord: the note you press is not lost.
+    step = {
+      space: begin,
+      noteOn: (e) => {
+        begin();
+        playStep.noteOn(e);
+      },
+      noteOff: ({ note }) => {
+        feedback.delete(note);
+        stale.delete(note);
+      },
+    };
+    autoGo(countdown, 3, 'Comença', begin);
   }
 
   function chordFor(root, quality) {
@@ -4398,9 +4277,16 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
           // Adapt the tempo of the next try.
           const drop = tempoDrop.get(mission.id) ?? 0;
           let tempoNote = '';
+          // Going badly: the example comes back on its own before the next try,
+          // so you see and hear the card instead of guessing it again.
+          const rough = got === 0 || ratio < 0.5;
+          const inARow = rough ? (badTries.get(mission.id) ?? 0) + 1 : 0;
+          if (rough) badTries.set(mission.id, inARow);
+          else badTries.delete(mission.id);
+          const showDemo = rough && canListen;
           // Help follows the result: a missed try lights the keys, a good one takes the help away again.
           let helpNote = '';
-          if (got === 0 && help === 'none' && !helpBoost.get(mission.id)) {
+          if ((got === 0 || inARow >= 2) && help === 'none' && !helpBoost.get(mission.id)) {
             helpBoost.set(mission.id, true);
             helpNote = 'Al proper intent les tecles s\'il·luminen.';
           } else if (got >= 2 && helpBoost.get(mission.id)) {
@@ -4427,14 +4313,19 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
               type === 'band' && recoveries ? `Has tornat a entrar ${recoveries} ${recoveries === 1 ? 'vegada' : 'vegades'} després d'un error: així es toca en grup!` : '',
               tempoNote,
               helpNote,
+              showDemo ? `<b>Abans de tornar-hi t'ho ensenyo:</b> el piano toca ${demoCount === 1 ? 'la carta' : 'la roda'} i la pilota et va mostrant on cau cada nota.${inARow >= 2 ? ' Mira-t\'ho amb calma, que no corre pressa.' : ''}` : '',
               clean < results.length ? 'Mira les marques de les cartes per veure què ha passat.' : '',
             ].filter(Boolean).join(' '),
             tips: clean === results.length ? [] : tipsFor(stats),
             detail: level === 1 ? null : { results },
             groove: { style, tempo, chords: progression, meter: world.meter ?? '4/4' },
-            retry: () => play(false),
-            retryLabel: tempoNow() < tempo ? `↻ Torna-hi més lent (${tempoNow()})` : '↻ Torna-ho a provar',
-            extra: canListen ? [button('♪ Escolta i toca', () => play(true), 'ghost')] : [],
+            retry: () => play(showDemo),
+            retryLabel: showDemo
+              ? `♪ T'ho ensenyo i tornem-hi${tempoNow() < tempo ? ` (més lent, ${tempoNow()})` : ''}`
+              : tempoNow() < tempo ? `↻ Torna-hi més lent (${tempoNow()})` : '↻ Torna-ho a provar',
+            extra: canListen
+              ? [showDemo ? button('Torna-hi sense escoltar', () => play(false), 'ghost') : button('♪ Escolta i toca', () => play(true), 'ghost')]
+              : [],
           });
         },
       });
