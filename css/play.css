@@ -3236,3 +3236,108 @@ button.play-hands-chip b {
 .play-mission.small-keys .play-piano {
   opacity: 0.6;
 }
+
+/* ---- Shared library of the diagram generator ------------------------------------------------------ */
+
+.play-buttons.left {
+  justify-content: flex-start;
+}
+
+.play-library-status.bad {
+  color: var(--play-red);
+  font-weight: 700;
+}
+
+.play-library-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.play-library-levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.play-library-levels .play-chip.on {
+  background: var(--chip, var(--play-yellow));
+  border-color: var(--chip, var(--play-yellow));
+  color: #fff;
+}
+
+.play-library-filter {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 14px;
+  color: var(--play-ink);
+  background: rgb(255 255 255 / 6%);
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 10px;
+}
+
+.play-library-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.play-library-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgb(255 255 255 / 5%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 12px;
+}
+
+.play-library-row.busy {
+  opacity: 0.6;
+}
+
+.play-library-level {
+  flex: none;
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  border-radius: 999px;
+}
+
+.play-library-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.play-library-text strong {
+  font-size: 16px;
+}
+
+.play-library-artist {
+  color: var(--play-muted);
+}
+
+.play-library-text small {
+  display: block;
+  color: var(--play-muted);
+}
+
+.play-library a {
+  color: var(--play-yellow);
+}
+
+.play-song.library .play-song-icon {
+  filter: none;
+}
+
+@media (max-width: 600px) {
+  .play-library-row {
+    flex-wrap: wrap;
+  }
+}

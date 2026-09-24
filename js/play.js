@@ -31,6 +31,7 @@ import { SONGBOOK, songbookSpec } from './songbook.js';
 import { renderGuide, renderGuidePrint } from './guide.js';
 import { STAGE_NAMES, applyOutcome, emptyState, known, levelOf, nextStep, progressOf, skillsFor, weak } from './adaptive.js';
 import { CHALLENGES, GUIDES, MODES, callPhrase, closeStats, countNote, emptyStats, guideNotes, readStats } from './improvise.js';
+import { LEVEL_COLOURS, errorText, listLibrary, loadLibrarySong, saveCode, savedCode, specFromLibrary } from './library.js';
 
 const STORAGE_KEY = 'rockin.play.v1';
 const PATHS_KEY = 'rockin.play.paths';
@@ -1033,6 +1034,130 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
     ]);
   }
 
+  // ---- The shared library of the diagram generator ----------------------------------------------------
+  // Songs the teachers share from https://rockin-cat.github.io/Generador-diagrames/
+  // open here as a path: the same code opens both.
+
+  let libraryList = null; // the list, once fetched in this session
+  function libraryBox() {
+    const list = el('div', { className: 'play-library-list' });
+    const status = el('p', { className: 'play-note play-library-status' });
+    const filter = el('input', { type: 'search', placeholder: 'Cerca per títol, artista o qui l\'ha compartida', className: 'play-library-filter', autocomplete: 'off' });
+    const levels = el('div', { className: 'play-library-levels' });
+    const tools = el('div', { className: 'play-library-tools', hidden: true }, [levels, filter]);
+    let level = '';
+    let busy = false;
+    const askCode = (again = false) => {
+      let code = again ? '' : savedCode();
+      if (!code) {
+        code = (window.prompt('Escriu el codi del professorat per obrir la biblioteca compartida:') ?? '').trim();
+        if (code) saveCode(code);
+      }
+      return code;
+    };
+    const say = (text, bad = false) => {
+      status.innerHTML = text;
+      status.classList.toggle('bad', bad);
+    };
+    const levelChip = (n) => {
+      const chip = el('span', { className: 'play-library-level', textContent: n === '' || n === undefined || n === null ? '' : `Nivell ${n}` });
+      if (LEVEL_COLOURS[n] !== undefined) chip.style.background = LEVEL_COLOURS[n];
+      else chip.hidden = true;
+      return chip;
+    };
+    const openSong = async (entry, row) => {
+      if (busy) return;
+      const code = askCode();
+      if (!code) return say(errorText(new Error('sense-codi')), true);
+      busy = true;
+      row.classList.add('busy');
+      say(`📥 Obrint «${entry.titol || entry.nom}»…`);
+      try {
+        const song = await loadLibrarySong(code, entry.id);
+        const spec = specFromLibrary(song, entry);
+        buildPath(spec, getCards()); // validates: the game has to be able to play it
+        // Opening it again refreshes the path; the stars stay, because the ids are the same.
+        customSpecs = [...customSpecs.filter((x) => x.id !== spec.id), spec];
+        save(PATHS_KEY, customSpecs);
+        openSongPath(spec.id);
+      } catch (error) {
+        console.warn('[Biblioteca]', error);
+        say(error.message?.startsWith('No reconec') || error.message?.startsWith('Tipus') ? `Aquesta cançó té un acord que el joc no sap tocar: ${error.message}` : errorText(error), true);
+      }
+      busy = false;
+      row.classList.remove('busy');
+    };
+    const render = () => {
+      const all = libraryList ?? [];
+      const q = filter.value.trim().toLowerCase();
+      const count = (n) => all.filter((c) => !n || String(c.nivell) === n).length;
+      setChildren(levels, ...[['', 'Tots'], ['0', 'Nivell 0'], ['1', 'Nivell 1'], ['2', 'Nivell 2']].map(([n, label]) => {
+        const b = el('button', { type: 'button', className: `play-chip${level === n ? ' on' : ''}`, textContent: `${label} ${count(n)}` });
+        if (n && LEVEL_COLOURS[n]) b.style.setProperty('--chip', LEVEL_COLOURS[n]);
+        b.addEventListener('click', () => {
+          level = n;
+          render();
+        });
+        return b;
+      }));
+      const shown = all.filter((c) => (!level || String(c.nivell) === level) && (!q || [c.nom, c.titol, c.artista, c.autor].join(' ').toLowerCase().includes(q)));
+      if (!shown.length) {
+        setChildren(list, el('p', { className: 'play-note', textContent: all.length ? 'Cap cançó coincideix amb la cerca o el nivell.' : 'Encara no hi ha cap cançó compartida.' }));
+        return;
+      }
+      setChildren(list, ...shown.map((c) => {
+        const date = c.data ? new Date(c.data).toLocaleDateString('ca-ES', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+        const mine = customSpecs.some((x) => x.id === `biblio:${c.id}`);
+        const row = el('div', { className: 'play-library-row' }, [
+          levelChip(String(c.nivell ?? '')),
+          el('div', { className: 'play-library-text' }, [
+            el('strong', { textContent: c.titol || c.nom }),
+            c.artista ? el('span', { className: 'play-library-artist', textContent: ` — ${c.artista}` }) : null,
+            el('small', { textContent: [c.autor ? `Compartida per ${c.autor}` : '', date, mine ? 'ja és als teus camins' : ''].filter(Boolean).join(' · ') }),
+          ]),
+          button(mine ? '↻ Torna a obrir' : 'Obrir', () => openSong(c, row), mine ? 'ghost small' : 'small'),
+        ]);
+        return row;
+      }));
+    };
+    const fetchList = async (refresh = false) => {
+      if (busy) return;
+      const code = askCode(refresh === 'code');
+      if (!code) return say(errorText(new Error('sense-codi')), true);
+      busy = true;
+      say('Carregant la biblioteca…');
+      try {
+        libraryList = await listLibrary(code);
+        tools.hidden = false;
+        say(`${libraryList.length} ${libraryList.length === 1 ? 'cançó compartida' : 'cançons compartides'}.`);
+        render();
+      } catch (error) {
+        console.warn('[Biblioteca]', error);
+        libraryList = null;
+        say(errorText(error), true);
+      }
+      busy = false;
+    };
+    filter.addEventListener('input', render);
+    const box = el('div', { className: 'play-world play-library' }, [
+      el('h3', { textContent: '📚 Biblioteca compartida' }),
+      el('p', { className: 'play-note', innerHTML: 'Les cançons que el professorat comparteix des del <a href="https://rockin-cat.github.io/Generador-diagrames/" target="_blank" rel="noopener">Generador de diagrames</a>: aquí s\'obren com un camí, amb els seus acords, l\'estructura, l\'estil i el tempo. Cal el codi del professorat.' }),
+      el('div', { className: 'play-buttons left' }, [
+        button(libraryList ? '↻ Actualitza la llista' : '📚 Obre la biblioteca', () => fetchList(true), libraryList ? 'ghost small' : 'primary'),
+        button('Canvia el codi', () => fetchList('code'), 'ghost small'),
+      ]),
+      status,
+      tools,
+      list,
+    ]);
+    if (libraryList) {
+      tools.hidden = false;
+      say(`${libraryList.length} ${libraryList.length === 1 ? 'cançó compartida' : 'cançons compartides'}.`);
+      render();
+    }
+    return box;
+  }
+
   function showSongs() {
     const quick = (song, i) => {
       const b = el('button', { type: 'button', className: 'play-song-quick' }, [
@@ -1094,12 +1219,15 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
         save(PATHS_KEY, customSpecs);
         showSongs();
       });
-      const card = el('div', { className: 'play-song', role: 'button', tabIndex: 0 }, [
+      const card = el('div', { className: `play-song${spec.library ? ' library' : ''}`, role: 'button', tabIndex: 0 }, [
         remove,
-        el('span', { className: 'play-song-icon', textContent: '♬' }),
+        el('span', { className: 'play-song-icon', textContent: spec.library ? '📚' : '♬' }),
         el('strong', { textContent: spec.name || spec.progression }),
+        spec.artist ? el('small', { className: 'play-song-artist', textContent: spec.artist }) : null,
         el('div', { className: 'play-goal-chords' }, spec.progression.split('|').map((c) => chordChip(c.trim(), spec.key ?? keyOf(spec)))),
-        el('small', { textContent: `Compàs ${spec.meter}${spec.chorus ? ' · amb tornada' : ''}${total ? ` · ★ ${stars}/${total}` : ''}` }),
+        el('small', { textContent: spec.library
+          ? `${styleName(spec.style)} · ${spec.tempo} bpm${spec.library.autor ? ` · de ${spec.library.autor}` : ''}${total ? ` · ★ ${stars}/${total}` : ''}`
+          : `Compàs ${spec.meter}${spec.chorus ? ' · amb tornada' : ''}${total ? ` · ★ ${stars}/${total}` : ''}` }),
       ]);
       card.addEventListener('click', () => openSongPath(spec.id));
       card.addEventListener('keydown', (event) => {
@@ -1131,6 +1259,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       cards.length
         ? el('div', { className: 'play-world' }, [el('h3', { textContent: 'Els teus camins' }), el('div', { className: 'play-songs' }, cards)])
         : null,
+      libraryBox(),
       el('div', { className: 'play-world' }, [
         el('h3', { textContent: 'Cançons conegudes' }),
         el('p', { className: 'play-note', textContent: 'Tria\'n una i es crea el camí al moment.' }),

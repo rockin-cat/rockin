@@ -238,6 +238,7 @@ const SECTIONS = [
       <ul>
         <li><b>Cançons del llibre ROCKIN</b>: Corren, De Bonesh, Diamonds, En la tormenta, Flor de primavera, Me gustas tú, Sense tu, Som ocells i Urras, amb la tonalitat, l'estil, el tempo i l'estructura del llibre (sense lletres). A Sense tu, la tornada canvia d'acord cada dos temps al llibre; al joc cada acord dura un compàs.</li>
         <li><b>Cançons conegudes</b>: un clic crea el camí d'aquella progressió.</li>
+        <li><b>📚 Biblioteca compartida</b>: les cançons que el professorat comparteix des del <a href="https://rockin-cat.github.io/Generador-diagrames/" target="_blank" rel="noopener">Generador de diagrames</a>, amb el mateix codi del professorat (es demana un cop i queda desat al navegador). Es poden filtrar per nivell (0, 1, 2) i cercar per títol, artista o qui l'ha compartida. «Obrir» crea el camí amb els acords de cada part, l'ordre de l'estructura, la tonalitat, l'estil i el tempo de la fitxa. Als compassos amb dos acords s'hi toca el que dura més; els acords menors escrits amb «-» i els power chords (D5) es llegeixen igualment. Tornar a obrir una cançó actualitza el camí sense perdre les estrelles.</li>
         <li><b>+ Crea un camí</b>: nom, roda d'acords (escrita o d'una cançó coneguda), tornada opcional, transport a una altra tonalitat, compàs (4/4, 3/4, 6/8, 12/8), estil de la base, tempo i si comença llegint cartes. Els camins creats surten com a targetes amb ✕ per esborrar-los.</li>
       </ul>
       <h4>El mapa d'una cançó</h4>
