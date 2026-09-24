@@ -1241,7 +1241,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
         el('div', { className: 'play-hello-text' }, [
           el('div', { className: 'play-kicker', textContent: 'Cançons' }),
           el('h2', { textContent: 'Aprèn a tocar una cançó' }),
-          el('p', { className: 'play-note', textContent: 'Cada cançó té el seu camí: aprendre els acords, els canvis, la roda amb les cartes i tocar-la amb la banda.' }),
+          el('p', { className: 'play-note', textContent: 'Cada cançó té el seu camí: aprendre els acords, els canvis, la roda amb les cartes i tocar-la amb la banda. Les del professorat són a la biblioteca compartida, aquí sota.' }),
         ]),
         el('div', { className: 'play-resume' }, [
           el('small', { textContent: 'Una cançó teva o una progressió de classe' }),
@@ -1251,6 +1251,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
           }),
         ]),
       ]),
+      libraryBox(),
       el('div', { className: 'play-world' }, [
         el('h3', { textContent: '📖 Cançons del llibre ROCKIN' }),
         el('p', { className: 'play-note', textContent: 'Amb la graella de cada cançó i els acords pintats pel seu grau, com al llibre.' }),
@@ -1259,7 +1260,6 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       cards.length
         ? el('div', { className: 'play-world' }, [el('h3', { textContent: 'Els teus camins' }), el('div', { className: 'play-songs' }, cards)])
         : null,
-      libraryBox(),
       el('div', { className: 'play-world' }, [
         el('h3', { textContent: 'Cançons conegudes' }),
         el('p', { className: 'play-note', textContent: 'Tria\'n una i es crea el camí al moment.' }),
