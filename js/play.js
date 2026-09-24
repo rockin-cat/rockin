@@ -832,6 +832,11 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       tab('cami', '🎸 El camí'),
       tab('adapt', '🧭 Camí intel·ligent'),
       button('🖨 Fitxa', () => printSheet(), 'ghost small'),
+      button('📚 Biblioteca', () => {
+        jumpToLibrary = true;
+        screen = 'songs';
+        showMap();
+      }, 'ghost small'),
     ]);
   }
 
@@ -1039,6 +1044,7 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
   // open here as a path: the same code opens both.
 
   let libraryList = null; // the list, once fetched in this session
+  let jumpToLibrary = false; // the songs screen scrolls to the library and opens it
   function libraryBox() {
     const list = el('div', { className: 'play-library-list' });
     const status = el('p', { className: 'play-note play-library-status' });
@@ -1154,6 +1160,13 @@ export function createPlay({ root, getCards, playNotes, getLabels, getHeld, stor
       tools.hidden = false;
       say(`${libraryList.length} ${libraryList.length === 1 ? 'cançó compartida' : 'cançons compartides'}.`);
       render();
+    }
+    if (jumpToLibrary) {
+      jumpToLibrary = false;
+      setTimeout(() => {
+        box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (!libraryList && savedCode()) fetchList();
+      }, 50);
     }
     return box;
   }
