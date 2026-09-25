@@ -1,0 +1,22 @@
+{
+  "title": "ROCKIN · Entrenador d'acompanyament / ROCKIN Accompaniment Trainer",
+  "description": "<p><b>CA:</b> Joc web per aprendre a acompanyar amb teclat: l'alumnat toca progressions d'acords sobre una base musical seguint els patrons de les cartes Rockin, amb correcció en temps real (entrada MIDI o teclat de l'ordinador), itineraris guiats i vista de professorat.</p><p><b>EN:</b> Browser game for learning keyboard accompaniment: students play chord progressions over a backing track following the patterns of the Rockin cards, with real-time feedback (MIDI or computer keyboard), guided paths and a teacher view.</p>",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "González Fernández, Laia",
+      "affiliation": "Rockin.cat SCCL"
+    }
+  ],
+  "license": "cc-by-nc-sa-4.0",
+  "access_right": "open",
+  "keywords": [
+    "music education",
+    "educació musical",
+    "keyboard accompaniment",
+    "MIDI",
+    "game-based learning",
+    "Rockin"
+  ],
+  "language": "cat"
+}
